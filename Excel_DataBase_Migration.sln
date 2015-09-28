@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.31101.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel_DataBase_Migration", "Excel_DataBase_Migration\Excel_DataBase_Migration.csproj", "{580858F9-0300-4027-873C-747614D4938B}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{580858F9-0300-4027-873C-747614D4938B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{580858F9-0300-4027-873C-747614D4938B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{580858F9-0300-4027-873C-747614D4938B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{580858F9-0300-4027-873C-747614D4938B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
