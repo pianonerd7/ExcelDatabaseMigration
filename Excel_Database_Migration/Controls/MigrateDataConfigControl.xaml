@@ -8,12 +8,14 @@
     <Grid>
         
         <TextBlock Text="Select Migration File Path" />
-        
-        
-        <TextBlock /> 
-        <Button Content="File Path" />
-        
-        <TextBlock />
+
+
+        <TextBlock Text="{Binding MigrationFilePath}"/>
+        <Button 
+            Content="File Path" 
+            Command="{Binding SelectFilePathCommand}"/>
+
+        <TextBlock Text="{Binding AttributeFilePath}"/>
         <Button Content="File Path" />
     </Grid>
 </UserControl>

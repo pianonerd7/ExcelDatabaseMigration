@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,6 +14,8 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Private Declarations
 
+        private string _migrationFilePath;
+        private string _attributeFilePath;
         private readonly ICommand _selectFilePathCommand;
 
         #endregion
@@ -26,7 +29,37 @@ namespace Excel_Database_Migration.ViewModel
 
         #endregion 
 
-        #region Public Properties
+        #region
+
+        public string MigrationFilePath
+        {
+            get
+            {
+                return _migrationFilePath;
+            }
+            set
+            {
+                _migrationFilePath = value;
+                OnPropertyChanged("MigrationFilePath");
+            }
+        }
+
+        public string AttributeFilePath
+        {
+            get
+            {
+                return _attributeFilePath;
+            }
+            set
+            {
+                _attributeFilePath = value;
+                OnPropertyChanged("AttributeFilePath");
+            }
+        }
+
+        #endregion
+
+        #region Public Commands
 
         public ICommand SelectFilePathCommand
         {
@@ -46,7 +79,13 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteSelectFilePathCommand(object obj)
         {
+            OpenFileDialog dialog = new OpenFileDialog();
 
+            //dialog.Filter = "*.xls";
+            /*
+            textBox1.Text = dialog.FileName;
+             * textbox2.Text = dialog.SafeFileName;
+            */
         }
 
         #endregion
