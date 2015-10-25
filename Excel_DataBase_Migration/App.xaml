@@ -7,14 +7,15 @@
         <Style TargetType="Button">
             <Setter Property="FontSize" Value="50" />
             <Setter Property="IsEnabled" Value="true" />
+            <Setter Property="Width" Value="250" />
             <Setter Property="Template" >
                 <Setter.Value>
                     <ControlTemplate TargetType="Button" >
                         <Border BorderBrush="Transparent" 
                                 BorderThickness="10" 
-                                Background="Khaki" 
-                                Padding="15" 
-                                CornerRadius="20"
+                                Background="DeepSkyBlue" 
+                                Padding="5" 
+                                CornerRadius="15"
                                 >
                             <Grid Background="DeepSkyBlue" >
                                 <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
