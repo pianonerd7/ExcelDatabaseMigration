@@ -74,15 +74,15 @@
                 Margin="10,10,0,0" 
                 Width="100" 
                 FontSize="14" 
-                Command="{Binding SelectFilePathCommand}"/>
+                Command="{Binding SelectAttributeFilePathCommands}"/>
 
-        <Button Grid.Row="4"
+        <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                 Content="Continue"
-                Height="32"
+                Height="35"
                 HorizontalAlignment="Right"
                 VerticalAlignment="Center"
                 Margin="10"
-                Width="150" 
+                Width="200" 
                 FontSize="14"/>
     </Grid>
 </UserControl>
