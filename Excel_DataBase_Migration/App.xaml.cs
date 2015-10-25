@@ -6,7 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace Excel_DataBase_Migration
+namespace Excel_Database_Migration
 {
     /// <summary>
     /// Interaction logic for App.xaml
