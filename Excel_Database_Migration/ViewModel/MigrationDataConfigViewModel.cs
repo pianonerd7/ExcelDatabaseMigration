@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Excel_Database_Migration.ViewModel
@@ -18,7 +19,7 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Constructor
 
-        public MigrationDataConfigViewModel()
+        public MigrationDataConfigViewModel(Window mainWindow)
         {
             _selectFilePathCommand = new DelegateCommand(ExecuteSelectFilePathCommand, CanExecuteCommand);
         }
