@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        
+        <StackPanel>
         <TextBlock Text="Select Migration File Path" />
 
 
@@ -15,7 +15,6 @@
             Content="File Path" 
             Command="{Binding SelectFilePathCommand}"/>
 
-        <TextBlock Text="{Binding AttributeFilePath}"/>
-        <Button Content="File Path" />
+        </StackPanel>
     </Grid>
 </UserControl>
