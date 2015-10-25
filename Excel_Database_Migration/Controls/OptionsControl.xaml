@@ -30,7 +30,7 @@
             FontSize="20"
             Width="250"
             Content="Migrate Data"
-            Command="{Binding }"/>
+            Command="{Binding MigrateDataCommand}"/>
         <Button 
             Grid.Column="1" 
             Grid.Row="1" 
