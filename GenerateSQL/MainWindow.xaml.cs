@@ -35,10 +35,9 @@ namespace GenerateSQL
 
 
             string sourceFile, worksheetName, targetFile;
-            sourceFile = "source.xls"; worksheetName = "sheet1"; targetFile = "target.csv";
+            sourceFile = "source.xls"; worksheetName = "Sheet1"; targetFile = "target.csv";
 
-            XLSXToCSVConverter Converter = new XLSXToCSVConverter();
-            Converter.convertExcelToCSV(sourceFile, worksheetName, targetFile);
+            XLSXToCSVConverter.convertExcelToCSV(sourceFile, worksheetName, targetFile);
 
         }
     }
