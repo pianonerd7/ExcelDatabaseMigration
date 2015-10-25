@@ -83,6 +83,7 @@
                 VerticalAlignment="Center"
                 Margin="10"
                 Width="200" 
-                FontSize="14"/>
+                FontSize="14"
+                Command="{Binding }"/>
     </Grid>
 </UserControl>

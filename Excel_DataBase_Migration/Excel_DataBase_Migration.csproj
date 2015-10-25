@@ -53,13 +53,22 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\DatabaseAccessControl.xaml.cs">
+      <DependentUpon>DatabaseAccessControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\MigrateDataConfigControl.xaml.cs">
       <DependentUpon>MigrateDataConfigControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseAccess\DatabaseAccess.cs" />
+    <Compile Include="DatabaseAccess\QueryWrapper.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\MigrationDataConfigViewModel.cs" />
     <Compile Include="ViewModel\OptionsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Page Include="Controls\DatabaseAccessControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\MigrateDataConfigControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -112,7 +121,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DatabaseAccess\" />
     <Folder Include="SQLGeneration\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
