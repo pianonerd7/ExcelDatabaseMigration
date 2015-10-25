@@ -17,6 +17,7 @@ namespace Excel_Database_Migration.ViewModel
         private string _migrationFilePath;
         private string _attributeFilePath;
         private readonly ICommand _selectFilePathCommand;
+        private readonly ICommand _selectAttributeFilePathCommand;
 
         #endregion
 
@@ -25,6 +26,7 @@ namespace Excel_Database_Migration.ViewModel
         public MigrationDataConfigViewModel(Window mainWindow)
         {
             _selectFilePathCommand = new DelegateCommand(ExecuteSelectFilePathCommand, CanExecuteCommand);
+            _selectAttributeFilePathCommand = new DelegateCommand(ExecuteSelectAttributeFilePathCommand, CanExecuteCommand);
         }
 
         #endregion 
@@ -68,6 +70,14 @@ namespace Excel_Database_Migration.ViewModel
                 return _selectFilePathCommand;
             }
         }
+
+        public ICommand SelectAttributeFilePathCommands
+        {
+            get
+            {
+                return _selectAttributeFilePathCommand;
+            }
+        }
         #endregion
 
         #region Private Methods
@@ -90,6 +100,18 @@ namespace Excel_Database_Migration.ViewModel
             }
         }
 
+        private void ExecuteSelectAttributeFilePathCommand(object obj)
+        {
+            OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.Filter = "CSV Files|*.csv";
+            Nullable<bool> result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                AttributeFilePath = dialog.FileName;
+            }
+        }
         #endregion
 
     }

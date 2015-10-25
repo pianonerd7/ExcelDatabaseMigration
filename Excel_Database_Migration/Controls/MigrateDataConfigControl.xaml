@@ -5,16 +5,79 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    
     <Grid>
-        <StackPanel>
-        <TextBlock Text="Select Migration File Path" />
-
-
-        <TextBlock Text="{Binding MigrationFilePath}"/>
-        <Button 
-            Content="File Path" 
-            Command="{Binding SelectFilePathCommand}"/>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="2*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock 
+            Grid.Row="0" 
+            Text="Select Migration File Path" 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Margin="10, 0, 0, 0"
+            FontSize="20"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="1">
+            <TextBox Height="40" 
+                     HorizontalAlignment="Left" 
+                     VerticalAlignment="Top"
+                     Margin="10,10,0,0" 
+                     Width="400" 
+                     IsEnabled="False"
+                     FontSize="14"
+                     TextAlignment="Left"
+                     TextWrapping="WrapWithOverflow"
+                     Text="{Binding MigrationFilePath}"/>
+            <Button Content="Browse" 
+                    Height="32" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="10"
+                    Width="80" 
+                    FontSize="14" 
+                    Command="{Binding SelectFilePathCommand}"/>
         </StackPanel>
+
+        <TextBlock 
+            Grid.Row="2" 
+            Text="Select Migration File Path" 
+            HorizontalAlignment="Left"
+            VerticalAlignment="Bottom"
+            Margin="10, 0, 0, 0"
+            FontSize="20"/>
+        <StackPanel Orientation="Horizontal" Grid.Row="3">
+            <TextBox Height="40" 
+                     HorizontalAlignment="Left" 
+                     VerticalAlignment="Top"
+                     Margin="10,10,0,0" 
+                     Width="400" 
+                     IsEnabled="False"
+                     FontSize="14"
+                     TextAlignment="Left"
+                     TextWrapping="WrapWithOverflow"
+                     Text="{Binding AttributeFilePath}"/>
+            <Button Content="Browse" 
+                    Height="32" 
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Margin="10"
+                    Width="80" 
+                    FontSize="14" 
+                    Command="{Binding SelectAttributeFilePathCommands}"/>
+        </StackPanel>
+        
+        <Button Grid.Row="4"
+                Content="Continue"
+                Height="32"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Center"
+                Margin="10"
+                Width="150" 
+                FontSize="14"/>
     </Grid>
 </UserControl>
