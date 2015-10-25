@@ -40,10 +40,10 @@
         
         <Button Grid.Column="1" Grid.Row="1"
                 Content="Browse" 
-                Height="32" 
+                Height="40"
                 HorizontalAlignment="Stretch" 
-                VerticalAlignment="Stretch" 
-                Margin="10"
+                VerticalAlignment="Center" 
+                Margin="10,10,0,0" 
                 Width="100" 
                 FontSize="14" 
                 Command="{Binding SelectFilePathCommand}"/>
@@ -57,25 +57,24 @@
         
         <TextBox Grid.Column="0" Grid.Row="3"
                  Height="40" 
-                 HorizontalAlignment="Left" 
-                 VerticalAlignment="Top"
-                 Margin="10,10,0,0" 
-                 Width="400" 
+                 HorizontalAlignment="Stretch" 
+                 VerticalAlignment="Stretch"
+                 Margin="10,10,0,0"  
                  IsEnabled="False"
                  FontSize="14"
                  TextAlignment="Left"
                  TextWrapping="WrapWithOverflow"
                  Text="{Binding AttributeFilePath}"/>
-        
+
         <Button Grid.Column="1" Grid.Row="3"
                 Content="Browse" 
-                Height="32" 
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Margin="10"
-                Width="80" 
+                Height="40"
+                HorizontalAlignment="Stretch" 
+                VerticalAlignment="Center" 
+                Margin="10,10,0,0" 
+                Width="100" 
                 FontSize="14" 
-                Command="{Binding SelectAttributeFilePathCommands}"/>
+                Command="{Binding SelectFilePathCommand}"/>
 
         <Button Grid.Row="4"
                 Content="Continue"
