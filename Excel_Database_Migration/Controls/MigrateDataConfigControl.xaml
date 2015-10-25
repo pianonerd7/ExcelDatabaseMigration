@@ -9,5 +9,11 @@
         
         <TextBlock Text="Select Migration File Path" />
         
+        
+        <TextBlock /> 
+        <Button Content="File Path" />
+        
+        <TextBlock />
+        <Button Content="File Path" />
     </Grid>
 </UserControl>
