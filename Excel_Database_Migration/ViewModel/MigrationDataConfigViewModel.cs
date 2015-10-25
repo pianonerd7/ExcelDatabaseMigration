@@ -81,7 +81,12 @@ namespace Excel_Database_Migration.ViewModel
         {
             //MigrationFilePath = "this worked!";
             OpenFileDialog dialog = new OpenFileDialog();
+            Nullable<bool> result = dialog.ShowDialog();
 
+            if (result == true)
+            {
+                MigrationFilePath = dialog.FileName;
+            }
             //dialog.Filter = "GPD|*.gpd";
             /*
             textBox1.Text = dialog.FileName;
