@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Excel_DataBase_Migration", 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GenerateSQL", "GenerateSQL\GenerateSQL.csproj", "{C8F6369D-D77E-493F-8EB5-56EFBFE4E333}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessDataBase", "AccessDataBase\AccessDataBase.csproj", "{E2661CB0-6D92-47F2-BAFC-8AE443ED03F8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{C8F6369D-D77E-493F-8EB5-56EFBFE4E333}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C8F6369D-D77E-493F-8EB5-56EFBFE4E333}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C8F6369D-D77E-493F-8EB5-56EFBFE4E333}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E2661CB0-6D92-47F2-BAFC-8AE443ED03F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E2661CB0-6D92-47F2-BAFC-8AE443ED03F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E2661CB0-6D92-47F2-BAFC-8AE443ED03F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E2661CB0-6D92-47F2-BAFC-8AE443ED03F8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

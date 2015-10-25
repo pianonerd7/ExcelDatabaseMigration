@@ -12,8 +12,58 @@ namespace GenerateSQL.ExcelUtils
     public class XLSXToCSVConverter
     {
 
-        public void convert(string xlsxInputPath, string csvOutputPath, string worksheetName)
+        public void convertExcelToCSV(string sourceFile, string worksheetName, string targetFile)
         {
+            string strConn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + sourceFile + ";Extended Properties=\" Excel.0;HDR=Yes;IMEX=1\"";
+            OleDbConnection conn = null;
+            StreamWriter wrtr = null;
+            OleDbCommand cmd = null;
+            OleDbDataAdapter da = null;
+            try
+            {
+                conn = new OleDbConnection(strConn);
+                conn.Open();
+
+                cmd = new OleDbCommand("SELECT * FROM [" + worksheetName + "$]", conn);
+                cmd.CommandType = CommandType.Text;
+                wrtr = new StreamWriter(targetFile);
+
+                da = new OleDbDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+
+                for (int x = 0; x < dt.Rows.Count; x++)
+                {
+                    string rowString = "";
+                    for (int y = 0; y < dt.Columns.Count; y++)
+                    {
+                        rowString += "\"" + dt.Rows[x][y].ToString() + "\",";
+                    }
+                    wrtr.WriteLine(rowString);
+                }
+                Console.WriteLine();
+                Console.WriteLine("Done! Your " + sourceFile + " has been converted into " + targetFile + ".");
+                Console.WriteLine();
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine(exc.ToString());
+                Console.ReadLine();
+            }
+            finally
+            {
+                if (conn.State == ConnectionState.Open)
+                    conn.Close();
+                conn.Dispose();
+                cmd.Dispose();
+                da.Dispose();
+                wrtr.Close();
+                wrtr.Dispose();
+            }
+        }
+        public void Convert(string xlsxInputPath, string csvOutputPath, string worksheetName)
+        {
+           /*
             if (!File.Exists(xlsxInputPath))
             {
                 throw new FileNotFoundException();
@@ -22,7 +72,7 @@ namespace GenerateSQL.ExcelUtils
             {
                 throw new ArgumentException();
             }
-
+            */
             var connectionString = String.Format("Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};;Extended Properties=\" Excel.0;HDR=Yes;IMEX=1\"", xlsxInputPath);
 
             OleDbConnection connection = null;

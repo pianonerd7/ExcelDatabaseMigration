@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GenerateSQL.ExcelUtils;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,7 +23,23 @@ namespace GenerateSQL
     {
         public MainWindow()
         {
-            InitializeComponent();
+            //InitializeComponent();
+
+            /*
+            string sourceFile, worksheetName, targetFile;
+            sourceFile = "Test.xlsx"; worksheetName = "Sheet1"; targetFile = "target.csv";
+
+            XLSXToCSVConverter Converter = new XLSXToCSVConverter();
+            Converter.Convert(sourceFile, targetFile, worksheetName);
+             */
+
+
+            string sourceFile, worksheetName, targetFile;
+            sourceFile = "source.xls"; worksheetName = "sheet1"; targetFile = "target.csv";
+
+            XLSXToCSVConverter Converter = new XLSXToCSVConverter();
+            Converter.convertExcelToCSV(sourceFile, worksheetName, targetFile);
+
         }
     }
 }
