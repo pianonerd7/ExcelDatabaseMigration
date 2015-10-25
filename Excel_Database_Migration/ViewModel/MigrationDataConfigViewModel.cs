@@ -79,19 +79,15 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteSelectFilePathCommand(object obj)
         {
-            //MigrationFilePath = "this worked!";
             OpenFileDialog dialog = new OpenFileDialog();
+
+            dialog.Filter = "Excel Files|*.xls;*xlsx;*xlsm";
             Nullable<bool> result = dialog.ShowDialog();
 
             if (result == true)
             {
                 MigrationFilePath = dialog.FileName;
             }
-            //dialog.Filter = "GPD|*.gpd";
-            /*
-            textBox1.Text = dialog.FileName;
-             * textbox2.Text = dialog.SafeFileName;
-            */
         }
 
         #endregion
