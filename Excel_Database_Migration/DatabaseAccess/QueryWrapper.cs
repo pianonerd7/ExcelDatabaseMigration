@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Excel_Database_Migration.DatabaseAccess
 {
-    private class QueryWrapper
+    internal class QueryWrapper
     {
 
     }

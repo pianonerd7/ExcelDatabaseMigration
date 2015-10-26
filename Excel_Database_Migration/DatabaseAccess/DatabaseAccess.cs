@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 
 namespace Excel_Database_Migration.DatabaseAccess
 {
-    protected class DatabaseAccess
+    internal class DatabaseAccess
     {
 
         private readonly string _connectionString;
