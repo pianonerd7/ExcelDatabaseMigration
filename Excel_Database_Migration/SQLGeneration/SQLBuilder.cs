@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Excel_Database_Migration.ExcelUtils;
 
-namespace GenerateSQL.SQLGeneration
+namespace Excel_Database_Migration.SQLGeneration
 {
     class SQLBuilder
     {
