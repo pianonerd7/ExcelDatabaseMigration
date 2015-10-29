@@ -16,10 +16,11 @@ namespace Excel_Database_Migration.SQLGeneration
         public static void generate (string xlsxPath, string datatypePath = null)
         {
             string filename = Path.GetFileNameWithoutExtension(xlsxPath);
-            string pathWOExtension = Path.GetDirectoryName(xlsxPath) + filename;
+            string pathWOExtension = Path.GetDirectoryName(xlsxPath)+ "\\" + filename;
             
             //convert from xlsx to csv
             string csvPath =  pathWOExtension + ".csv";
+            Console.WriteLine("csvPath is: " + csvPath);
             XLSXToCSVConverter.toCSV(xlsxPath, csvPath);
 
             //represent csv as an object
@@ -28,6 +29,7 @@ namespace Excel_Database_Migration.SQLGeneration
 
             //make the contents of the sql script
             string sqlPath = pathWOExtension + ".sql";
+            Console.WriteLine("sqlPath is: " + sqlPath);
             string sqlContent = new SQLBuilder(csv, filename, filename, datatypePath).
                 createSchema().createTable().createInsert().build();
 

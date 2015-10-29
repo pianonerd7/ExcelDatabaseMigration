@@ -19,6 +19,7 @@ namespace Excel_Database_Migration.SQLGeneration
         {
             this.csv = csv;
             this.schemaName = schemaName;
+            this.tableName = tableName;
             this.datatypePath = datatypePath;
             builder = new StringBuilder();
         }
