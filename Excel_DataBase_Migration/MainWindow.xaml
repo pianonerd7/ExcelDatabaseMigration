@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Control="clr-namespace:Excel_Database_Migration.Controls"
         Title="MainWindow" Height="500" Width="800">
-    <Grid Background="LightGray">
+    <Grid>
         <Control:OptionsControl/>
     </Grid>
 </Window>

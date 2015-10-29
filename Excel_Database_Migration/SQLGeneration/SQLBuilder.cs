@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using GenerateSQL.ExcelUtils;
+using Excel_Database_Migration.ExcelUtils;
 
-namespace GenerateSQL.SQLGeneration
+namespace Excel_Database_Migration.SQLGeneration
 {
     class SQLBuilder
     {

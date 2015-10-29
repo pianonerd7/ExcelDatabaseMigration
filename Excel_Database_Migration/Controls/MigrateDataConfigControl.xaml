@@ -84,6 +84,6 @@
                 Margin="10"
                 Width="200" 
                 FontSize="14"
-                Command="{Binding }"/>
+                Command="{Binding ContinueConfigCommand}"/>
     </Grid>
 </UserControl>

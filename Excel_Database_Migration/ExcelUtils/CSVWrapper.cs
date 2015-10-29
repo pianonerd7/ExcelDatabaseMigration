@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using Microsoft.VisualBasic.FileIO;
 
-namespace GenerateSQL.ExcelUtils
+namespace Excel_Database_Migration.ExcelUtils
 {
     //uses VB's FileIO so that framework needs to be referenced
     class CSVWrapper

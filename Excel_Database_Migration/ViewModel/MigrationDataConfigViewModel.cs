@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Excel_Database_Migration.Controls;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,10 +15,12 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Private Declarations
 
+        private Window _mainWindow;
         private string _migrationFilePath;
         private string _attributeFilePath;
         private readonly ICommand _selectFilePathCommand;
         private readonly ICommand _selectAttributeFilePathCommand;
+        private readonly ICommand _continueConfigCommand;
 
         #endregion
 
@@ -25,8 +28,10 @@ namespace Excel_Database_Migration.ViewModel
 
         public MigrationDataConfigViewModel(Window mainWindow)
         {
+            _mainWindow = mainWindow;
             _selectFilePathCommand = new DelegateCommand(ExecuteSelectFilePathCommand, CanExecuteCommand);
             _selectAttributeFilePathCommand = new DelegateCommand(ExecuteSelectAttributeFilePathCommand, CanExecuteCommand);
+            _continueConfigCommand = new DelegateCommand(ExecuteContinueConfigCommand, CanExecuteContinueConfigCommand);
         }
 
         #endregion 
@@ -78,6 +83,14 @@ namespace Excel_Database_Migration.ViewModel
                 return _selectAttributeFilePathCommand;
             }
         }
+
+        public ICommand ContinueConfigCommand
+        {
+            get
+            {
+                return _continueConfigCommand;
+            }
+        }
         #endregion
 
         #region Private Methods
@@ -111,6 +124,21 @@ namespace Excel_Database_Migration.ViewModel
             {
                 AttributeFilePath = dialog.FileName;
             }
+        }
+
+
+        private bool CanExecuteContinueConfigCommand(object obj)
+        {
+            //return _migrationFilePath == null;
+            //TODO
+            return true;
+        }
+
+        private void ExecuteContinueConfigCommand(object obj)
+        {
+
+
+            _mainWindow.Content = new ConfirmationControl();
         }
         #endregion
 
