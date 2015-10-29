@@ -35,7 +35,7 @@ namespace GenerateSQL.ExcelUtils
         {
             if (!File.Exists(path))
             {
-                throw new FileNotFoundException(String.Format("csv file was not found at: %s", path));
+                throw new FileNotFoundException(String.Format("csv file was not found at: {0}", path));
             }
             using (TextFieldParser parser = new TextFieldParser(path))
             {
