@@ -137,7 +137,7 @@ namespace Excel_Database_Migration.ViewModel
         private void ExecuteContinueConfigCommand(object obj)
         {
 
-
+            SQLGeneration.SQLGenerator.generate(MigrationFilePath);
             _mainWindow.Content = new ConfirmationControl();
         }
         #endregion
