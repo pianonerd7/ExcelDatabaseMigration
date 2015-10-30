@@ -1,68 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GenerateSQL.ExcelUtils
+namespace Excel_Database_Migration.ExcelUtils
 {
     public class XLSXToCSVConverter
     {
 
-        public static void convertExcelToCSV(string sourceFile, string worksheetName, string targetFile)
+        public static void toCSV(string filePath, string destination)
         {
-            //Msexcl40.dll is needed
-            string strConn = "Provider=Microsoft.Jet.OLEDB.4.0;Data Source=" + sourceFile + ";Extended Properties=\" Excel 8.0;HDR=Yes;IMEX=1\"";
-            OleDbConnection conn = null;
-            StreamWriter wrtr = null;
-            OleDbCommand cmd = null;
-            OleDbDataAdapter da = null;
-            try
-            {
-                conn = new OleDbConnection(strConn);
-                conn.Open();
+            Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
+            Microsoft.Office.Interop.Excel.Workbook wb = app.Workbooks.Open(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
 
-                cmd = new OleDbCommand("SELECT * FROM [" + worksheetName + "$]", conn);
-                cmd.CommandType = CommandType.Text;
-                
-                wrtr = new StreamWriter(targetFile);
+            // this does not throw exception if file doesnt exist
+            File.Delete(destination);
 
-                da = new OleDbDataAdapter(cmd);
-                DataTable dt = new DataTable();
-                da.Fill(dt);
+            wb.SaveAs(destination, Microsoft.Office.Interop.Excel.XlFileFormat.xlCSVWindows, Type.Missing, Type.Missing, false, false, Microsoft.Office.Interop.Excel.XlSaveAsAccessMode.xlExclusive, Microsoft.Office.Interop.Excel.XlSaveConflictResolution.xlLocalSessionChanges, false, Type.Missing, Type.Missing, Type.Missing);
 
-                for (int x = 0; x < dt.Rows.Count; x++)
-                {
-                    string rowString = "";
-                    for (int y = 0; y < dt.Columns.Count; y++)
-                    {
-                        rowString += "\"" + dt.Rows[x][y].ToString() + "\",";
-                    }
-                    wrtr.WriteLine(rowString);
-                }
-                Console.WriteLine();
-                Console.WriteLine("Done! Your " + sourceFile + " has been converted into " + targetFile + ".");
-                Console.WriteLine();
-            }
-            catch (Exception exc)
-            {
-                Console.WriteLine("error happened");
-                Console.WriteLine(exc.ToString());
-                Console.ReadLine();
-            }
-            finally
-            {
-                if (conn.State == ConnectionState.Open)
-                    conn.Close();
-                conn.Dispose();
-                cmd.Dispose();
-                da.Dispose();
-                wrtr.Close();
-                wrtr.Dispose();
-            }
+            wb.Close(false, Type.Missing, Type.Missing);
+
+            app.Quit();
         }
-   }
+
+    }
 }

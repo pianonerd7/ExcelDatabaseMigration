@@ -12,14 +12,15 @@ namespace Excel_Database_Migration.SQLGeneration
         private CSVWrapper csv;
         private string schemaName;
         private string tableName;
-        private string sqlPath;
+        private string datatypePath;
         private StringBuilder builder;
 
-        public SQLBuilder(CSVWrapper csv, string schemaName, string tableName, string sqlPath)
+        public SQLBuilder(CSVWrapper csv, string schemaName, string tableName, string datatypePath)
         {
             this.csv = csv;
             this.schemaName = schemaName;
-            this.sqlPath = sqlPath;
+            this.tableName = tableName;
+            this.datatypePath = datatypePath;
             builder = new StringBuilder();
         }
 

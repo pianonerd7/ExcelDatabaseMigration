@@ -66,8 +66,8 @@
     <Compile Include="DatabaseAccess\DatabaseAccess.cs" />
     <Compile Include="DatabaseAccess\QueryWrapper.cs" />
     <Compile Include="ExcelUtils\CSVWrapper.cs" />
+    <Compile Include="SQLGeneration\SQLGenerator.cs" />
     <Compile Include="ExcelUtils\XLSXToCSVConverter.cs" />
-    <Compile Include="SQLGeneration\XLSXToCSVConverter.cs" />
     <Compile Include="SQLGeneration\SQLBuilder.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\MigrationDataConfigViewModel.cs" />
