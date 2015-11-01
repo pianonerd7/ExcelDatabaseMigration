@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("ExcelDatabaseMigrationTest")]
+[assembly: AssemblyTitle("Excel_Database_Migration_Test")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("ExcelDatabaseMigrationTest")]
+[assembly: AssemblyProduct("Excel_Database_Migration_Test")]
 [assembly: AssemblyCopyright("Copyright ©  2015")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("ff49377f-236b-4d9a-8bb4-3b657e59ca3c")]
+[assembly: Guid("dbaa74bb-a655-46b3-9cf7-244e205937cc")]
 
 // Version information for an assembly consists of the following four values:
 //
