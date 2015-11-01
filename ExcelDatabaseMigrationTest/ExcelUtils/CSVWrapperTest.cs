@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Excel_Database_Migration.ExcelUtils;
 
 namespace ExcelDatabaseMigrationTest.ExcelUtils
 {
@@ -7,9 +8,9 @@ namespace ExcelDatabaseMigrationTest.ExcelUtils
     public class CSVWrapperTest
     {
         [TestMethod]
-        public void openCSV()
+        public void openCSV_emptyPath()
         {
-
+            
         }
     }
 }
