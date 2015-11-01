@@ -62,6 +62,10 @@
       <Name>Excel_Database_Migration</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <None Include="testData\empty.csv" />
+    <None Include="testData\test1.csv" />
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
