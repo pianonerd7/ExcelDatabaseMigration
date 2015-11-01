@@ -54,6 +54,8 @@
   <ItemGroup>
     <Compile Include="ExcelUtils\CSVWrapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SQLGeneration\SQLBuilderTest.cs" />
+    <Compile Include="TestHelpers\FormatPath.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Excel_Database_Migration\Excel_Database_Migration.csproj">
