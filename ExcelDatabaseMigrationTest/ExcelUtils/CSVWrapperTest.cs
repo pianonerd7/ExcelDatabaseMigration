@@ -3,6 +3,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Excel_Database_Migration.ExcelUtils;
 using System.IO;
 using System.Diagnostics;
+using ExcelDatabaseMigrationTest.TestHelpers;
 
 namespace ExcelDatabaseMigrationTest.ExcelUtils
 {
@@ -18,25 +19,19 @@ namespace ExcelDatabaseMigrationTest.ExcelUtils
         }
 
         [TestMethod]
-        public void directory()
-        {
-            Trace.WriteLine("environment is: " + Environment.CurrentDirectory);
-            Trace.WriteLine("environment is: " + formatPath("test1.csv"));
-        }
-
-        [TestMethod]
         public void openCSV_existing_EmptyFile()
         {
             CSVWrapper csv = new CSVWrapper();
-            csv.openCSV(formatPath("empty.csv"));
+            csv.openCSV(FormatPath.formatPath("empty.csv"));
             Assert.IsNull(csv.Attributes);
+            Assert.AreEqual(0, csv.Data.Count);
         }
 
         [TestMethod]
         public void openCSV_existing_smallFile()
         {
             CSVWrapper csv = new CSVWrapper();
-            csv.openCSV(formatPath("test1.csv"));
+            csv.openCSV(FormatPath.formatPath("test1.csv"));
             Assert.IsNotNull(csv.Attributes);
             string[] expectedAttributes = {"Name", "Gender", "Salary" };
             checkAttributes(expectedAttributes, csv);
@@ -46,16 +41,6 @@ namespace ExcelDatabaseMigrationTest.ExcelUtils
             new string[] {"Sara", "F", "40" },
             new string[] {"Serena", "F", "50" } };
             checkData(expectedData, csv);
-        }
-
-        private string formatPath (string filename)
-        {
-            DirectoryInfo d = new DirectoryInfo(Environment.CurrentDirectory);
-            Trace.WriteLine(d.ToString());
-            
-            DirectoryInfo twoup = d.Parent.Parent;
-            Trace.WriteLine(twoup.FullName.ToString());
-            return twoup.FullName.ToString() + "\\" + "testData" + "\\" + filename;
         }
 
         private void checkAttributes(String[] expected, CSVWrapper csv)
