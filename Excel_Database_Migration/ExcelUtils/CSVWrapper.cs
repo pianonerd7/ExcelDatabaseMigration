@@ -9,7 +9,7 @@ using Microsoft.VisualBasic.FileIO;
 namespace Excel_Database_Migration.ExcelUtils
 {
     //uses VB's FileIO so that framework needs to be referenced
-    class CSVWrapper 
+    public class CSVWrapper 
     {
         private string[] attributes;
         private List<string[]> data;
@@ -42,10 +42,7 @@ namespace Excel_Database_Migration.ExcelUtils
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
                 string[] fields = parser.ReadFields();
-                if (fields != null)
-                {
-                    attributes = fields;
-                }
+                attributes = fields;
                 while (!parser.EndOfData)
                 {
                     fields = parser.ReadFields();
