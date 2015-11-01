@@ -21,7 +21,7 @@ namespace Excel_Database_Migration.SQLGeneration
             //convert from xlsx to csv
             string csvPath =  pathWOExtension + ".csv";
             Console.WriteLine("csvPath is: " + csvPath);
-            XLSXToCSVConverter.ToCSV(xlsxPath, csvPath);
+            XLSXToCSVConverter.toCSV(xlsxPath, csvPath);
 
             //represent csv as an object
             CSVWrapper csv = new CSVWrapper();

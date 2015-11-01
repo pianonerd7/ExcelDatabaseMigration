@@ -10,7 +10,7 @@ namespace Excel_Database_Migration.ExcelUtils
     public class XLSXToCSVConverter
     {
 
-        public static void ToCSV(string filePath, string destination)
+        public static void toCSV(string filePath, string destination)
         {
             Microsoft.Office.Interop.Excel.Application app = new Microsoft.Office.Interop.Excel.Application();
             Microsoft.Office.Interop.Excel.Workbook wb = app.Workbooks.Open(filePath, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing, Type.Missing);
