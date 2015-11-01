@@ -86,7 +86,7 @@ namespace ExcelDatabaseMigrationTest.SQLGeneration
             SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
             Assert.AreEqual("", builder.build());
             builder.createInsert();
-            Assert.AreEqual("INSERT INTO Employee((Name, Gender, Salary)VALUES (Tom, M, 20);+\nINSERT INTO Employee((Name, Gender, Salary)VALUES(Adam, M, 30);+\nINSERT INTO Employee((Name, Gender, Salary)VALUES(Sara, F, 40);+\nINSERT INTO Employee((Name, Gender, Salary)VALUES(Serena, F, 50); ", builder.build());
+            Assert.AreEqual("INSERT INTO Employee((Name, Gender, Salary)VALUES (Tom, M, 20);\nINSERT INTO Employee((Name, Gender, Salary)VALUES(Adam, M, 30);\nINSERT INTO Employee((Name, Gender, Salary)VALUES(Sara, F, 40);\nINSERT INTO Employee((Name, Gender, Salary)VALUES(Serena, F, 50);\n", builder.build());
         }
     }
 }
