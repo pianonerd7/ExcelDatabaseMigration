@@ -7,7 +7,7 @@ using Excel_Database_Migration.ExcelUtils;
 
 namespace Excel_Database_Migration.SQLGeneration
 {
-    class SQLBuilder
+    public class SQLBuilder
     {
         private CSVWrapper csv;
         private string schemaName;
@@ -26,13 +26,26 @@ namespace Excel_Database_Migration.SQLGeneration
 
         public SQLBuilder createSchema()
         {
+            if (schemaName=="" || schemaName== null)
+            {
+                return this;
+            }
             builder.Append(String.Format("CREATE SCHEMA IF NOT EXISTS {0};\n", schemaName));
             return this;
         }
 
         public SQLBuilder createTable()
         {
+            if (tableName=="" || tableName== null)
+            {
+                return this;
+            }
             builder.Append(String.Format("CREATE TABLE {0} (", tableName));
+            if (csv.Attributes == null)
+            {
+                builder.Append(");\n");
+                return this;
+            }
             for (int i = 0; i<csv.Attributes.Length; i++)
             {
                 builder.Append(csv.Attributes[i]);

@@ -42,10 +42,7 @@ namespace Excel_Database_Migration.ExcelUtils
                 parser.TextFieldType = FieldType.Delimited;
                 parser.SetDelimiters(",");
                 string[] fields = parser.ReadFields();
-                if (fields != null)
-                {
-                    attributes = fields;
-                }
+                attributes = fields;
                 while (!parser.EndOfData)
                 {
                     fields = parser.ReadFields();
