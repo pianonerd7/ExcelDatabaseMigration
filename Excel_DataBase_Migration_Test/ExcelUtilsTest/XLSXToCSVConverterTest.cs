@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Moq;
 
 namespace Excel_DataBase_Migration_Test.ExcelUtilsTest
 {
@@ -16,6 +17,7 @@ namespace Excel_DataBase_Migration_Test.ExcelUtilsTest
         [TestMethod]
         public void ToCSVTest()
         {
+            var mockExcel = new Mock<Application>();
 
         }
     }
