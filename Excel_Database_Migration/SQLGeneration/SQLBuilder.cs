@@ -64,6 +64,10 @@ namespace Excel_Database_Migration.SQLGeneration
         */
         public SQLBuilder createInsert()
         {
+            if (csv.Attributes== null)
+            {
+                return this;
+            }
             string attributes = formatAttributes();
             for (int i = 0; i<csv.Data.Count; i++)
             {
