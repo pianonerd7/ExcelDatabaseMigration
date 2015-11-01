@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ExcelDatabaseMigrationTest.TestHelpers
+namespace Excel_DataBase_Migration_Test.TestHelpers
 {
     class FormatPath
     {
