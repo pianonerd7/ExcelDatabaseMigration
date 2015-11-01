@@ -66,5 +66,27 @@ namespace ExcelDatabaseMigrationTest.SQLGeneration
             builder.createTable();
             Assert.AreEqual("CREATE TABLE Employee (Name varchar(255), Gender varchar(255), Salary varchar(255));\n", builder.build());
         }
+
+        [TestMethod]
+        public void createInsertTest_emptyCSV()
+        {
+            CSVWrapper csv = new CSVWrapper();
+            csv.openCSV(FormatPath.formatPath("empty.csv"));
+            SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
+            Assert.AreEqual("", builder.build());
+            builder.createInsert();
+            Assert.AreEqual("", builder.build());
+        }
+
+        [TestMethod]
+        public void createInsertTest_smallCSV()
+        {
+            CSVWrapper csv = new CSVWrapper();
+            csv.openCSV(FormatPath.formatPath("test1.csv"));
+            SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
+            Assert.AreEqual("", builder.build());
+            builder.createInsert();
+            Assert.AreEqual("INSERT INTO Employee((Name, Gender, Salary)VALUES (Tom, M, 20);+\nINSERT INTO Employee((Name, Gender, Salary)VALUES(Adam, M, 30);+\nINSERT INTO Employee((Name, Gender, Salary)VALUES(Sara, F, 40);+\nINSERT INTO Employee((Name, Gender, Salary)VALUES(Serena, F, 50); ", builder.build());
+        }
     }
 }
