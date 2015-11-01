@@ -55,6 +55,12 @@
     <Compile Include="ExcelUtils\CSVWrapperTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Excel_Database_Migration\Excel_Database_Migration.csproj">
+      <Project>{062d6cad-37b0-4668-9738-e0291012e2ee}</Project>
+      <Name>Excel_Database_Migration</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">
       <ItemGroup>
