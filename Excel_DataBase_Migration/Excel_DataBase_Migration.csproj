@@ -69,6 +69,7 @@
     <Compile Include="SQLGeneration\SQLGenerator.cs" />
     <Compile Include="ExcelUtils\XLSXToCSVConverter.cs" />
     <Compile Include="SQLGeneration\SQLBuilder.cs" />
+    <Compile Include="ViewModel\DatabaseAccessViewModel.cs" />
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\MigrationDataConfigViewModel.cs" />
     <Compile Include="ViewModel\OptionsViewModel.cs" />
