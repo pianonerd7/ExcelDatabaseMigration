@@ -62,6 +62,7 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteAccessDatabaseCommand(object obj)
         {
+            _mainWindow.Content = new DatabaseAccessControl();
 
         }
 

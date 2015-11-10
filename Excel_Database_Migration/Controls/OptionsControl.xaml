@@ -36,6 +36,7 @@
             Grid.Row="1" 
             FontSize="20"
             Width="250"
-            Content="Access Database" />
+            Content="Access Database" 
+            Command="{Binding AccessDatabaseCommand}"/>
     </Grid>
 </UserControl>
