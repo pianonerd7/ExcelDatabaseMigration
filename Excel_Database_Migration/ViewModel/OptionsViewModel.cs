@@ -29,6 +29,8 @@ namespace Excel_Database_Migration.ViewModel
             _accessDatabaseCommand = new DelegateCommand(ExecuteAccessDatabaseCommand, CanExecuteCommand);
         }
 
+        #endregion 
+
         #region Public Commands
 
         public ICommand MigrateDataCommand 
@@ -49,6 +51,8 @@ namespace Excel_Database_Migration.ViewModel
 
         #endregion
 
+        #region Private Methods
+
         private bool CanExecuteCommand(object obj)
         {
             return true;
@@ -63,7 +67,7 @@ namespace Excel_Database_Migration.ViewModel
         private void ExecuteAccessDatabaseCommand(object obj)
         {
             _mainWindow.Content = new DatabaseAccessControl();
-
+            _mainWindow.DataContext = new DatabaseAccessViewModel(_mainWindow);
         }
 
         #endregion

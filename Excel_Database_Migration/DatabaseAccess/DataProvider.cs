@@ -8,5 +8,10 @@ namespace Excel_Database_Migration.DatabaseAccess
 {
     public class DataProvider
     {
+        //private adapter;
+        public DataProvider()
+        {
+
+        }
     }
 }
