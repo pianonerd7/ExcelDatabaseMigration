@@ -1,6 +1,7 @@
 ﻿using Excel_Database_Migration.ExcelUtils;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Data;
 using System.Linq;
 using System.Text;
@@ -15,6 +16,8 @@ namespace Excel_Database_Migration.ViewModel
 
         private Window _mainWindow;
         private DataTable _queryData;
+        private ObservableCollection<String> _columnHeader;
+        private String str = "testtesttest";
 
         #endregion
 
@@ -22,7 +25,9 @@ namespace Excel_Database_Migration.ViewModel
         public DatabaseAccessViewModel(Window window)
         {
             this._mainWindow = window;
+            _columnHeader = new ObservableCollection<string>();
             testData();
+            ExtractColumnHeader(_queryData);
         }
 
         private void testData()
@@ -31,16 +36,13 @@ namespace Excel_Database_Migration.ViewModel
 
             table.Columns.Add("Name");
             table.Columns.Add("Animal");
-            table.Columns.Add("Number");
+            table.Columns.Add("super looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong");
             table.Columns.Add("Fruit");
-            
-            DataRow row1 = table.NewRow();
-            row1["Name"] = "Bob";
-            row1["Animal"] = "Dog";
-            row1["Number"] = "100";
-            row1["Fruit"] = "Banana";
 
-            table.Rows.Add(row1);
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
+           
             _queryData = table;
         }
 
@@ -56,12 +58,38 @@ namespace Excel_Database_Migration.ViewModel
             }
         }
 
+        public ObservableCollection<String> ColumnHeader
+        {
+            get
+            {
+                return _columnHeader;
+            }
+        }
+
+        public String s
+        {
+            get
+            {
+                return this.str;
+            }
+        }
+
         #endregion
 
         #region Private Methods
 
-        private void populateGrid(DataTable dataList)
+        private void DataTableToObservableCollection(DataTable dataList)
         {
+
+        }
+
+        private void ExtractColumnHeader(DataTable dataList)
+        {
+            for (int i = 0; i < dataList.Columns.Count; i++)
+            {
+                str = str + dataList.Columns[i].ColumnName.ToString();
+                _columnHeader.Add(dataList.Columns[i].ColumnName.ToString());
+            }
 
         }
 
