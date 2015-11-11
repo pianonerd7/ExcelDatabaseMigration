@@ -17,7 +17,6 @@ namespace Excel_Database_Migration.ViewModel
         private Window _mainWindow;
         private DataTable _queryData;
         private ObservableCollection<String> _columnHeader;
-        private String str = "testtesttest";
 
         #endregion
 
@@ -39,6 +38,18 @@ namespace Excel_Database_Migration.ViewModel
             table.Columns.Add("super looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong");
             table.Columns.Add("Fruit");
 
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
             table.Rows.Add("Bob", "Dog", "100", "Banana");
             table.Rows.Add("John", "cat", "200", "apple");
             table.Rows.Add("Jerry", "Panda", "300", "pineapple");
@@ -66,14 +77,6 @@ namespace Excel_Database_Migration.ViewModel
             }
         }
 
-        public String s
-        {
-            get
-            {
-                return this.str;
-            }
-        }
-
         #endregion
 
         #region Private Methods
@@ -87,7 +90,6 @@ namespace Excel_Database_Migration.ViewModel
         {
             for (int i = 0; i < dataList.Columns.Count; i++)
             {
-                str = str + dataList.Columns[i].ColumnName.ToString();
                 _columnHeader.Add(dataList.Columns[i].ColumnName.ToString());
             }
 
