@@ -35,7 +35,7 @@ namespace Excel_Database_Migration.ViewModel
 
             table.Columns.Add("Name");
             table.Columns.Add("Animal");
-            table.Columns.Add("super looooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooong");
+            table.Columns.Add("Favorite Number");
             table.Columns.Add("Fruit");
 
             table.Rows.Add("Bob", "Dog", "100", "Banana");
