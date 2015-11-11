@@ -64,6 +64,7 @@
       <DependentUpon>MigrateDataConfigControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseAccess\DatabaseAccess.cs" />
+    <Compile Include="DatabaseAccess\DataProvider.cs" />
     <Compile Include="DatabaseAccess\QueryWrapper.cs" />
     <Compile Include="ExcelUtils\CSVWrapper.cs" />
     <Compile Include="SQLGeneration\SQLGenerator.cs" />
@@ -132,9 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="ExcelUtils\Excel_DataBase_Migration_Test.sln" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

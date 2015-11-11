@@ -6,8 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid Height="200" Width="500" HorizontalAlignment="Left" Margin="12,21,0,0"
-  Name="McDataGrid" VerticalAlignment="Top" RowHeight="30" ColumnWidth="100"
-          />
+        <DataGrid ItemsSource="{Binding}"/>
     </Grid>
 </UserControl>
