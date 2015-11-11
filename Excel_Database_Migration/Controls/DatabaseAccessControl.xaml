@@ -6,6 +6,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <Grid>
-        <DataGrid ItemsSource="{Binding QueryData}"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Grid.Row="0" Text="Database Preview" />
+                   
+        <DataGrid Margin="10"
+            Grid.Row="1"
+            HorizontalAlignment="Stretch"
+            ItemsSource="{Binding QueryData}"/>
     </Grid>
 </UserControl>

@@ -64,7 +64,6 @@
       <DependentUpon>MigrateDataConfigControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="DatabaseAccess\DatabaseAccess.cs" />
-    <Compile Include="DatabaseAccess\DataProvider.cs" />
     <Compile Include="DatabaseAccess\QueryWrapper.cs" />
     <Compile Include="ExcelUtils\CSVWrapper.cs" />
     <Compile Include="SQLGeneration\SQLGenerator.cs" />
