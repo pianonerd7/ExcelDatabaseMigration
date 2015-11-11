@@ -22,13 +22,11 @@ namespace Excel_Database_Migration.ExcelUtils
         public string[] Attributes
         {
             get { return this.attributes; }
-            set { this.attributes = value; }
         }
 
         public List<string[]> Data
         {
             get { return this.data; }
-            set { this.data = value; }
         }
 
         public void openCSV(string path)
