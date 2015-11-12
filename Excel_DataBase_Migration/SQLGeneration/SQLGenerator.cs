@@ -39,8 +39,12 @@ namespace Excel_Database_Migration.SQLGeneration
             //write sql to file
             System.IO.File.WriteAllText(sqlPath, sqlContent);
         }
+        private static string createConnectionStringFromDbName(string dbName)
+        {
+            return string.Format("Server=localhost;Integrated security=SSPI;database={0}Database", dbName); 
+        }
 
-        public static void createDatabaseFromSql(string dbName)
+        private static void createDatabaseFromSql(string dbName)
         {
             string connectionString = string.Format("Server=localhost;Integrated security=SSPI;database={0}Database", dbName);
             SqlConnection connection = new SqlConnection(connectionString);
@@ -66,6 +70,34 @@ namespace Excel_Database_Migration.SQLGeneration
                 if (connection.State == System.Data.ConnectionState.Open)
                 {
                     connection.Close();
+                }
+            }
+        }
+
+        private static void populateDatabaseFromSql(string sqlContent, string dbName )
+        {
+            string connectionString = string.Format("Server=localhost;Integrated security=SSPI;database={0}Database;", dbName);
+            SqlConnection connection = new SqlConnection(connectionString);
+
+            string[] lines = sqlContent.Split('\n');
+            foreach (string line in lines)
+            {
+                SqlCommand command = new SqlCommand(line, connection);
+                try
+                {
+                    connection.Open();
+                    command.ExecuteNonQuery();
+                }
+                catch (System.Exception e)
+                {
+                    MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+                finally
+                {
+                    if (connection.State == System.Data.ConnectionState.Open)
+                    {
+                        connection.Close();
+                    }
                 }
             }
         }
