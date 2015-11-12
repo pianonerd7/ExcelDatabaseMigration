@@ -19,6 +19,7 @@ namespace Excel_Database_Migration.ViewModel
         private DataTable _queryData;
         private ObservableCollection<String> _columnHeader;
         private readonly ICommand _searchCommand;
+        private string _searchCriteria;
 
         #endregion
 
@@ -80,6 +81,19 @@ namespace Excel_Database_Migration.ViewModel
             }
         }
 
+        public string SearchCriteria
+        {
+            get
+            {
+                return _searchCriteria;
+            }
+            set
+            {
+                _searchCriteria = value;
+                OnPropertyChanged("SearchCriteria");
+            }
+        }
+
         #endregion
 
         #region Commands
@@ -121,7 +135,7 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteSearchCommand(object obj)
         {
-            //TODO INSERT SEARCH QUERY METHOD HERE
+            //TODO INSERT SEARCH QUERY METHOD AND UPDATE DATATABLE
         }
 
 
