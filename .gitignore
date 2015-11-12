@@ -188,10 +188,6 @@ GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
 
-# Sample files
-*.xlsx
-*.xls
-*.csv
 
 # Code coverage binaries
 Excel_DataBase_Migration.v2.ncrunchsolution
