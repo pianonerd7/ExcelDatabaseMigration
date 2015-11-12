@@ -54,6 +54,7 @@ namespace Excel_Database_Migration.SQLGeneration
                 return this;
             }
             builder.Append(String.Format("CREATE TABLE {0} (", tableName));
+            builder.Append("RowID int");
             if (csv.Attributes == null)
             {
                 builder.Append(");\n");
@@ -61,12 +62,9 @@ namespace Excel_Database_Migration.SQLGeneration
             }
             for (int i = 0; i<csv.Attributes.Length; i++)
             {
+                builder.Append(", ");
                 builder.Append(csv.Attributes[i]);
                 builder.Append(" char(255)");
-                if (i != csv.Attributes.Length - 1)
-                {
-                builder.Append(", ");
-                }
             }
             builder.Append(");\n");
             return this;
