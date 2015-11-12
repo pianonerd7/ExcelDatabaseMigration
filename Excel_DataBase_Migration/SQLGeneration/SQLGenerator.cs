@@ -5,16 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Data.SqlClient;
-
-
 using Excel_Database_Migration.ExcelUtils;
-using Excel_Database_Migration.SQLGeneration;
 using System.Windows;
-using Excel_Database_Migration;
 
 namespace Excel_Database_Migration.SQLGeneration
 {
-    class SQLGenerator
+    public class SQLGenerator
     {
         public static void generate (string xlsxPath, string datatypePath = null)
         {
@@ -35,26 +31,29 @@ namespace Excel_Database_Migration.SQLGeneration
             Console.WriteLine("sqlPath is: " + sqlPath);
             string sqlContent = new SQLBuilder(csv, filename, filename, datatypePath).
                 createSchema().createTable().createInsert().build();
-
+            //createDatabaseFromSql(filename);
+            populateDatabaseFromSql(sqlContent, filename);
             //write sql to file
             System.IO.File.WriteAllText(sqlPath, sqlContent);
         }
+
         private static string createConnectionStringFromDbName(string dbName)
         {
-            return string.Format("Server=localhost;Integrated security=SSPI;database={0}Database", dbName); 
+            return string.Format("Server=localhost;Integrated security=True;database=master", dbName); 
         }
 
         private static void createDatabaseFromSql(string dbName)
         {
-            string connectionString = string.Format("Server=localhost;Integrated security=SSPI;database={0}Database", dbName);
+            string connectionString = createConnectionStringFromDbName(dbName);
             SqlConnection connection = new SqlConnection(connectionString);
-            string databaseQuery = string.Format("CREATE DATABASE {0} ON PRIMARY ", dbName) +
+            string databaseQuery1 = string.Format("CREATE DATABASE {0} ON PRIMARY ", dbName) +
                 string.Format("(NAME = {0}, ", dbName) +
-                string.Format("FILENAME = 'C:\\{0}.mdf', ", dbName) +
+                string.Format("FILENAME = '{0}.mdf', ", dbName) +
                 "SIZE = 10MB, MAXSIZE = 2GB, FILEGROWTH = 10%) " +
                 string.Format("LOG ON (NAME = {0}_Log, ", dbName) +
-                string.Format("FILENAME = 'C:\\{0}_Log.ldf', ", dbName) +
+                string.Format("FILENAME = '{0}_Log.ldf', ", dbName) +
                 "SIZE = 5MB, MAXSIZE = 1GB, FILEGROWTH = 10%)";
+            string databaseQuery = string.Format("CREATE DATABASE {0} IF NOT EXISTS", dbName);
             SqlCommand creationCommand = new SqlCommand(databaseQuery, connection);
             try
             {
@@ -76,14 +75,21 @@ namespace Excel_Database_Migration.SQLGeneration
 
         private static void populateDatabaseFromSql(string sqlContent, string dbName )
         {
-            string connectionString = string.Format("Server=localhost;Integrated security=SSPI;database={0}Database;", dbName);
+            string connectionString = createConnectionStringFromDbName(dbName);
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             string[] lines = sqlContent.Split('\n');
             foreach (string line in lines)
             {
-                SqlCommand command = new SqlCommand(line, connection);
-                command.ExecuteNonQuery();
+                try
+                {
+                    SqlCommand command = new SqlCommand(line, connection);
+                    command.ExecuteNonQuery();
+                }
+                catch (System.Exception e)
+                {
+                    MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
+                }
             }
             connection.Close();
         }

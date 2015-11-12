@@ -69,6 +69,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="testData\empty.csv" />
+    <None Include="testData\source.xlsx" />
     <None Include="testData\test1.csv" />
   </ItemGroup>
   <Choose>
