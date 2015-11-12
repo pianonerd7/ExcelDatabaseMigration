@@ -56,7 +56,8 @@
                 Width="180"
                 Content="Search" 
                 FontSize="20" 
-                HorizontalAlignment="Right"/>
+                HorizontalAlignment="Right"
+                Command="{Binding SearchCommand}"/>
         </Grid>                
         <DataGrid 
             Grid.Row="2"
