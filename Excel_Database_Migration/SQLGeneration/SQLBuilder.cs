@@ -24,6 +24,12 @@ namespace Excel_Database_Migration.SQLGeneration
             builder = new StringBuilder();
         }
 
+        public SQLBuilder dropTable()
+        {
+            builder.Append(String.Format("DROP TABLE IF EXISTS {0};\n", schemaName));
+            return this;
+        }
+
         public SQLBuilder createSchema()
         {
             if (schemaName=="" || schemaName== null)
@@ -84,7 +90,7 @@ namespace Excel_Database_Migration.SQLGeneration
         */
         private SQLBuilder createInsertRow(String attributes, int index)
         {
-            builder.Append(String.Format("INSERT INTO {0}(", tableName));
+            builder.Append(String.Format("INSERT INTO {0}", tableName));
             builder.Append(attributes);
             builder.Append("VALUES (");
             
