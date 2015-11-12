@@ -40,7 +40,7 @@ namespace Excel_Database_Migration.SQLGeneration
             System.IO.File.WriteAllText(sqlPath, sqlContent);
         }
 
-        private static string createConnectionStringFromDbName(string dbName)
+        public static string createConnectionStringFromDbName(string dbName)
         {
             return string.Format("Server=localhost;Integrated security=True;database={0}", dbName); 
         }
