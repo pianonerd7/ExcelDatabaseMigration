@@ -72,6 +72,7 @@
     <Compile Include="Pages\MigrateDataConfigPage.xaml.cs">
       <DependentUpon>MigrateDataConfigPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ProjectStrings.cs" />
     <Compile Include="SQLGeneration\SQLGenerator.cs" />
     <Compile Include="ExcelUtils\XLSXToCSVConverter.cs" />
     <Compile Include="SQLGeneration\SQLBuilder.cs" />
