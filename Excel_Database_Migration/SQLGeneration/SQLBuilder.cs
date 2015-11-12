@@ -54,7 +54,7 @@ namespace Excel_Database_Migration.SQLGeneration
                 return this;
             }
             builder.Append(String.Format("CREATE TABLE {0} (", tableName));
-            builder.Append("RowID int");
+            builder.Append("RowID int IDENTITY (1,1) PRIMARY KEY");
             if (csv.Attributes == null)
             {
                 builder.Append(");\n");
@@ -99,7 +99,6 @@ namespace Excel_Database_Migration.SQLGeneration
         */
         private SQLBuilder createInsertRow(String attributes, int index)
         {
-            //builder.Append(String.Format("INSERT INTO {0}.{1}.{2}", schemaName, schemaName, tableName));
             builder.Append(String.Format("INSERT INTO {0}", tableName));
             builder.Append(attributes);
             builder.Append(" VALUES (");
