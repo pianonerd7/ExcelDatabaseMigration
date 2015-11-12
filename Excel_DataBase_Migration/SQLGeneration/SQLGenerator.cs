@@ -4,10 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using System.Data.SqlClient;
 
 
 using Excel_Database_Migration.ExcelUtils;
 using Excel_Database_Migration.SQLGeneration;
+using System.Windows;
+using Excel_Database_Migration;
 
 namespace Excel_Database_Migration.SQLGeneration
 {
@@ -35,6 +38,36 @@ namespace Excel_Database_Migration.SQLGeneration
 
             //write sql to file
             System.IO.File.WriteAllText(sqlPath, sqlContent);
+        }
+
+        public static void createDatabaseFromSql(string dbName)
+        {
+            string connectionString = string.Format("Server=localhost;Integrated security=SSPI;database={0}Database", dbName);
+            SqlConnection connection = new SqlConnection(connectionString);
+            string databaseQuery = string.Format("CREATE DATABASE {0} ON PRIMARY ", dbName) +
+                string.Format("(NAME = {0}, ", dbName) +
+                string.Format("FILENAME = 'C:\\{0}.mdf', ", dbName) +
+                "SIZE = 10MB, MAXSIZE = 2GB, FILEGROWTH = 10%) " +
+                string.Format("LOG ON (NAME = {0}_Log, ", dbName) +
+                string.Format("FILENAME = 'C:\\{0}_Log.ldf', ", dbName) +
+                "SIZE = 5MB, MAXSIZE = 1GB, FILEGROWTH = 10%)";
+            SqlCommand creationCommand = new SqlCommand(databaseQuery, connection);
+            try
+            {
+                connection.Open();
+                creationCommand.ExecuteNonQuery();
+            }
+            catch (System.Exception e)
+            {
+                MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            finally
+            {
+                if (connection.State == System.Data.ConnectionState.Open)
+                {
+                    connection.Close();
+                }
+            }
         }
     }
 }
