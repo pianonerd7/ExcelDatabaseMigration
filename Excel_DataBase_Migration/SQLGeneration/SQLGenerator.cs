@@ -29,8 +29,11 @@ namespace Excel_Database_Migration.SQLGeneration
             //make the contents of the sql script
             string sqlPath = pathWOExtension + ".sql";
             Console.WriteLine("sqlPath is: " + sqlPath);
-            string sqlContent = new SQLBuilder(csv, filename, filename, datatypePath).
-                createSchema().createTable().createInsert().build();
+            string sqlContent = new SQLBuilder(csv, filename, filename+"Table", datatypePath).
+                createSchema().dropTable().createUse().createTable().createInsert().build();
+
+            System.IO.File.WriteAllText(sqlPath, sqlContent);
+
             //createDatabaseFromSql(filename);
             populateDatabaseFromSql(sqlContent, filename);
             //write sql to file
@@ -39,7 +42,7 @@ namespace Excel_Database_Migration.SQLGeneration
 
         private static string createConnectionStringFromDbName(string dbName)
         {
-            return string.Format("Server=localhost;Integrated security=True;database=master", dbName); 
+            return string.Format("Server=localhost;Integrated security=True;database={0}", dbName); 
         }
 
         private static void createDatabaseFromSql(string dbName)
@@ -81,13 +84,16 @@ namespace Excel_Database_Migration.SQLGeneration
             string[] lines = sqlContent.Split('\n');
             foreach (string line in lines)
             {
+                SqlCommand command = null;
                 try
                 {
-                    SqlCommand command = new SqlCommand(line, connection);
+                    command = new SqlCommand(line, connection);
+                    command.CommandText = line;
                     command.ExecuteNonQuery();
                 }
                 catch (System.Exception e)
                 {
+                    MessageBox.Show(command.CommandText, ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
                     MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }

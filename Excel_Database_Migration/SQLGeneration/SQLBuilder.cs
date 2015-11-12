@@ -23,10 +23,11 @@ namespace Excel_Database_Migration.SQLGeneration
             this.datatypePath = datatypePath;
             builder = new StringBuilder();
         }
-
+        
         public SQLBuilder dropTable()
         {
-            builder.Append(String.Format("DROP TABLE IF EXISTS {0};\n", schemaName));
+            builder.Append(String.Format(
+                "If Exists(Select object_id From sys.tables Where name = '{0}') Drop Table {1};\n", schemaName, schemaName));
             return this;
         }
 
@@ -36,7 +37,13 @@ namespace Excel_Database_Migration.SQLGeneration
             {
                 return this;
             }
-            builder.Append(String.Format("CREATE SCHEMA IF NOT EXISTS {0};\n", schemaName));
+            builder.Append(String.Format("IF NOT EXISTS (select * from sys.databases where name = '{0}') CREATE DATABASE {0};\n", schemaName, schemaName));
+            return this;
+        }
+        
+        public SQLBuilder createUse()
+        {
+            builder.Append(String.Format("use {0};\n", schemaName));
             return this;
         }
 
@@ -55,7 +62,7 @@ namespace Excel_Database_Migration.SQLGeneration
             for (int i = 0; i<csv.Attributes.Length; i++)
             {
                 builder.Append(csv.Attributes[i]);
-                builder.Append(" varchar(255)");
+                builder.Append(" char(255)");
                 if (i != csv.Attributes.Length - 1)
                 {
                 builder.Append(", ");
@@ -96,7 +103,9 @@ namespace Excel_Database_Migration.SQLGeneration
             
             for (int j = 0; j<csv.Data[index].Length; j++)
             {
+                builder.Append("'");
                 builder.Append(csv.Data[index][j]);
+                builder.Append("'");
                 if (j != csv.Data[index].Length - 1)
                 {
                     builder.Append(", ");
