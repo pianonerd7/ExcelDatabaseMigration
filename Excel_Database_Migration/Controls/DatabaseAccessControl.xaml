@@ -9,7 +9,7 @@
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="4*"/>
+            <RowDefinition Height="3*"/>
             <RowDefinition Height="7*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -28,7 +28,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="2*"/>
             </Grid.RowDefinitions>
             
             <TextBlock 
@@ -36,12 +36,13 @@
                 Grid.ColumnSpan="2"
                 Text="Please select from the drop down the column you wish to search from, and enter search criterias in the textbox" 
                 VerticalAlignment="Center" 
-                HorizontalAlignment="Center"
+                HorizontalAlignment="Left"
                 FontSize="13"/>
             <ComboBox 
                 Grid.Column="0" 
                 Grid.Row="1" 
                 Margin="0 0 10 0"
+                FontSize="14"
                 ItemsSource="{Binding ColumnHeader}" />           
             <TextBox 
                 Grid.Column="1" 
@@ -50,6 +51,7 @@
                 Margin="10 0 0 0"
                 Text="{Binding SearchCriteria}"/>           
             <Button 
+                Margin="0 5 0 0 "
                 Grid.Column="1" 
                 Grid.Row="2" 
                 Width="180"
