@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Input;
 
 namespace Excel_Database_Migration.ViewModel
 {
@@ -17,6 +18,7 @@ namespace Excel_Database_Migration.ViewModel
         private Window _mainWindow;
         private DataTable _queryData;
         private ObservableCollection<String> _columnHeader;
+        private readonly ICommand _searchCommand;
 
         #endregion
 
@@ -25,6 +27,7 @@ namespace Excel_Database_Migration.ViewModel
         {
             this._mainWindow = window;
             _columnHeader = new ObservableCollection<string>();
+            _searchCommand = new DelegateCommand(ExecuteSearchCommand, CanExecuteCommand);
             testData();
             ExtractColumnHeader(_queryData);
         }
@@ -79,6 +82,18 @@ namespace Excel_Database_Migration.ViewModel
 
         #endregion
 
+        #region Commands
+
+        public ICommand SearchCommand
+        {
+            get
+            {
+                return _searchCommand;
+            }
+        }
+
+        #endregion
+
         #region Private Methods
 
         private void DataTableToObservableCollection(DataTable dataList)
@@ -94,6 +109,21 @@ namespace Excel_Database_Migration.ViewModel
             }
 
         }
+
+        #endregion
+
+        #region Private Methods
+
+        private bool CanExecuteCommand(object obj)
+        {
+            return true;
+        }
+
+        private void ExecuteSearchCommand(object obj)
+        {
+            //TODO INSERT SEARCH QUERY METHOD HERE
+        }
+
 
         #endregion
 
