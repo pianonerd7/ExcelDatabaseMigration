@@ -78,28 +78,14 @@ namespace Excel_Database_Migration.SQLGeneration
         {
             string connectionString = string.Format("Server=localhost;Integrated security=SSPI;database={0}Database;", dbName);
             SqlConnection connection = new SqlConnection(connectionString);
-
+            connection.Open();
             string[] lines = sqlContent.Split('\n');
             foreach (string line in lines)
             {
                 SqlCommand command = new SqlCommand(line, connection);
-                try
-                {
-                    connection.Open();
-                    command.ExecuteNonQuery();
-                }
-                catch (System.Exception e)
-                {
-                    MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
-                }
-                finally
-                {
-                    if (connection.State == System.Data.ConnectionState.Open)
-                    {
-                        connection.Close();
-                    }
-                }
+                command.ExecuteNonQuery();
             }
+            connection.Close();
         }
     }
 }
