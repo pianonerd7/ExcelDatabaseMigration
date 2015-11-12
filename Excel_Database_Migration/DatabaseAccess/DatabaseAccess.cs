@@ -45,7 +45,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         /// </summary>
         /// <param name="query"></param>
         /// <returns>Return a datatable of queries results</returns>
-        protected static DataTable GetQuery(string query) {
+        public DataTable GetQuery(string query) {
 
             using (SqlConnection connection = ConnectToSql()) {
                 using (SqlDataAdapter adapter = new SqlDataAdapter()) {
@@ -71,7 +71,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         /// </summary>
         /// <param name="query"></param>
         /// <returns>Return the number of rows affected</returns>
-        protected static int GetNonQuery(string query) {
+        protected int GetNonQuery(string query) {
 
             int nonQuery = -1;
 
