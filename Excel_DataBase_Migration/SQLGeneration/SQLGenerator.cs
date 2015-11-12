@@ -32,9 +32,6 @@ namespace Excel_Database_Migration.SQLGeneration
             string sqlContent = new SQLBuilder(csv, filename, filename+"Table", datatypePath).
                 createSchema().dropTable().createUse().createTable().createInsert().build();
 
-            System.IO.File.WriteAllText(sqlPath, sqlContent);
-
-            //createDatabaseFromSql(filename);
             populateDatabaseFromSql(sqlContent, filename);
             //write sql to file
             System.IO.File.WriteAllText(sqlPath, sqlContent);
@@ -44,38 +41,13 @@ namespace Excel_Database_Migration.SQLGeneration
         {
             return string.Format("Server=localhost;Integrated security=True;database={0}", dbName); 
         }
-
-        private static void createDatabaseFromSql(string dbName)
-        {
-            string connectionString = createConnectionStringFromDbName(dbName);
-            SqlConnection connection = new SqlConnection(connectionString);
-            string databaseQuery1 = string.Format("CREATE DATABASE {0} ON PRIMARY ", dbName) +
-                string.Format("(NAME = {0}, ", dbName) +
-                string.Format("FILENAME = '{0}.mdf', ", dbName) +
-                "SIZE = 10MB, MAXSIZE = 2GB, FILEGROWTH = 10%) " +
-                string.Format("LOG ON (NAME = {0}_Log, ", dbName) +
-                string.Format("FILENAME = '{0}_Log.ldf', ", dbName) +
-                "SIZE = 5MB, MAXSIZE = 1GB, FILEGROWTH = 10%)";
-            string databaseQuery = string.Format("CREATE DATABASE {0} IF NOT EXISTS", dbName);
-            SqlCommand creationCommand = new SqlCommand(databaseQuery, connection);
-            try
-            {
-                connection.Open();
-                creationCommand.ExecuteNonQuery();
-            }
-            catch (System.Exception e)
-            {
-                MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
-            }
-            finally
-            {
-                if (connection.State == System.Data.ConnectionState.Open)
-                {
-                    connection.Close();
-                }
-            }
-        }
-
+        
+        /// <summary>
+        /// Goes through each line of the sql script and
+        /// executes a non query on them
+        /// </summary>
+        /// <param name="sqlContent"></param>
+        /// <param name="dbName"></param>
         private static void populateDatabaseFromSql(string sqlContent, string dbName )
         {
             string connectionString = createConnectionStringFromDbName(dbName);
