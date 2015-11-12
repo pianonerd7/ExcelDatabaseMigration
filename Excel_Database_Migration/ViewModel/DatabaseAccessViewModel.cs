@@ -1,4 +1,5 @@
-﻿using Excel_Database_Migration.ExcelUtils;
+﻿using Excel_Database_Migration.DatabaseAccess;
+using Excel_Database_Migration.ExcelUtils;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Excel_Database_Migration.ViewModel
@@ -15,7 +17,7 @@ namespace Excel_Database_Migration.ViewModel
     {
          #region Private Declaration
 
-        private Window _mainWindow;
+        private Page _mainWindow;
         private DataTable _queryData;
         private ObservableCollection<String> _columnHeader;
         private readonly ICommand _searchCommand;
@@ -24,7 +26,7 @@ namespace Excel_Database_Migration.ViewModel
         #endregion
 
         #region Constructor
-        public DatabaseAccessViewModel(Window window)
+        public DatabaseAccessViewModel(Page window)
         {
             this._mainWindow = window;
             _columnHeader = new ObservableCollection<string>();
@@ -136,6 +138,9 @@ namespace Excel_Database_Migration.ViewModel
         private void ExecuteSearchCommand(object obj)
         {
             //TODO INSERT SEARCH QUERY METHOD AND UPDATE DATATABLE
+            QueryWrapper queryWrapper = new QueryWrapper();
+            //queryWrapper.SelectQuery();
+            //_searchCriteria = "";
         }
 
 

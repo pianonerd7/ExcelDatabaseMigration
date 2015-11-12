@@ -1,11 +1,14 @@
 ﻿using Excel_Database_Migration.Controls;
+using Excel_Database_Migration.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace Excel_Database_Migration.ViewModel
 {
@@ -14,7 +17,7 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Private Declaration
 
-        private Window _mainWindow;
+        private Page _mainWindow;
         private readonly ICommand _migrateDataCommand;
         private readonly ICommand _accessDatabaseCommand;
 
@@ -22,7 +25,7 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Constructor
 
-        public OptionsViewModel(Window window)
+        public OptionsViewModel(Page window)
         {
             this._mainWindow = window;
             _migrateDataCommand = new DelegateCommand(ExecuteMigrateDataCommand, CanExecuteCommand);
@@ -66,8 +69,11 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteAccessDatabaseCommand(object obj)
         {
-            _mainWindow.Content = new DatabaseAccessControl();
-            _mainWindow.DataContext = new DatabaseAccessViewModel(_mainWindow);
+            //_mainWindow.Content = new DatabaseAccessControl();
+            //_mainWindow.DataContext = new DatabaseAccessViewModel(_mainWindow);
+            NavigationService navService = NavigationService.GetNavigationService(_mainWindow);
+            //navService.Navigate(new System.Uri("Pages/DatabaseAccessPage.xaml", UriKind.RelativeOrAbsolute));
+            navService.Navigate(new DatabaseAccessPage());
         }
 
         #endregion

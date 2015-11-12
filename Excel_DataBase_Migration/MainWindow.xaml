@@ -1,4 +1,4 @@
-﻿<Window x:Class="Excel_Database_Migration.MainWindow"
+﻿<Page x:Class="Excel_Database_Migration.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:Control="clr-namespace:Excel_Database_Migration.Controls"
@@ -6,4 +6,4 @@
     <Grid>
         <Control:OptionsControl/>
     </Grid>
-</Window>
+</Page>

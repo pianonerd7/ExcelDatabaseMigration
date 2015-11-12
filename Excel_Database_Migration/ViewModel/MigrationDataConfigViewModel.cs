@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Excel_Database_Migration.ViewModel
@@ -15,7 +16,7 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Private Declarations
 
-        private Window _mainWindow;
+        private Page _mainWindow;
         private string _migrationFilePath;
         private string _attributeFilePath;
         private readonly ICommand _selectFilePathCommand;
@@ -26,7 +27,7 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Constructor
 
-        public MigrationDataConfigViewModel(Window mainWindow)
+        public MigrationDataConfigViewModel(Page mainWindow)
         {
             _mainWindow = mainWindow;
             _selectFilePathCommand = new DelegateCommand(ExecuteSelectFilePathCommand, CanExecuteCommand);

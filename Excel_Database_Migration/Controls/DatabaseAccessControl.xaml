@@ -13,7 +13,6 @@
             <RowDefinition Height="7*"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        
         <TextBlock 
             Grid.Row="0" Text="Database Preview" 
             VerticalAlignment="Center" HorizontalAlignment="Center"
