@@ -27,7 +27,7 @@ namespace Excel_Database_Migration.SQLGeneration
         public SQLBuilder dropTable()
         {
             builder.Append(String.Format(
-                "If Exists(Select object_id From sys.tables Where name = '{0}') Drop Table {1};\n", schemaName, schemaName));
+                "If Exists(Select object_id From sys.tables Where name = '{0}') Drop Table {1};\n", tableName, tableName));
             return this;
         }
 
@@ -85,6 +85,10 @@ namespace Excel_Database_Migration.SQLGeneration
             for (int i = 0; i<csv.Data.Count; i++)
             {
                 createInsertRow(attributes, i);
+                if (i != csv.Data.Count - 1)
+                {
+                    builder.Append("\n");
+                }
             }
             return this;
         }
@@ -97,9 +101,10 @@ namespace Excel_Database_Migration.SQLGeneration
         */
         private SQLBuilder createInsertRow(String attributes, int index)
         {
+            //builder.Append(String.Format("INSERT INTO {0}.{1}.{2}", schemaName, schemaName, tableName));
             builder.Append(String.Format("INSERT INTO {0}", tableName));
             builder.Append(attributes);
-            builder.Append("VALUES (");
+            builder.Append(" VALUES (");
             
             for (int j = 0; j<csv.Data[index].Length; j++)
             {
@@ -111,7 +116,7 @@ namespace Excel_Database_Migration.SQLGeneration
                     builder.Append(", ");
                 }
             }
-            builder.Append(");\n");
+            builder.Append(");");
             return this;
         }
 
