@@ -63,16 +63,13 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteMigrateDataCommand(object obj)
         {
-            _mainWindow.Content = new MigrateDataConfigControl();
-            _mainWindow.DataContext = new MigrationDataConfigViewModel(_mainWindow);
+            NavigationService navService = NavigationService.GetNavigationService(_mainWindow);
+            navService.Navigate(new MigrateDataConfigPage());
         }
 
         private void ExecuteAccessDatabaseCommand(object obj)
         {
-            //_mainWindow.Content = new DatabaseAccessControl();
-            //_mainWindow.DataContext = new DatabaseAccessViewModel(_mainWindow);
             NavigationService navService = NavigationService.GetNavigationService(_mainWindow);
-            //navService.Navigate(new System.Uri("Pages/DatabaseAccessPage.xaml", UriKind.RelativeOrAbsolute));
             navService.Navigate(new DatabaseAccessPage());
         }
 
