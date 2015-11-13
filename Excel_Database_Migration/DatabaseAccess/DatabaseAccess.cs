@@ -35,7 +35,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         /// <returns></returns>
         private static SqlConnection ConnectToSql() {
 
-            SqlConnection connection = new SqlConnection(CON_STRING);
+            SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
             return connection;
 
