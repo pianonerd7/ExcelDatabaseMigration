@@ -7,18 +7,7 @@ namespace Excel_Database_Migration.DatabaseAccess
     internal class DatabaseAccess
     {
 
-        private readonly string _connectionString;
-        private const string CON_STRING = SQLGenerator.createConnectionStringFromDbName(SQLGenerator._dbName);
-        
-        
-        /// <summary>
-        /// Default Constructor for the Database class. 
-        /// Automatically connects to Microsoft SQL Server on current computer.
-        /// </summary>
-        public DatabaseAccess() : this(CON_STRING) 
-        {
-  
-        } 
+        private string _connectionString;
 
         /// <summary>
         /// Constructor overload in case user want's to connect to another server.
@@ -35,7 +24,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         /// <returns></returns>
         private static SqlConnection ConnectToSql() {
 
-            SqlConnection connection = new SqlConnection(CON_STRING);
+            SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
             return connection;
 
