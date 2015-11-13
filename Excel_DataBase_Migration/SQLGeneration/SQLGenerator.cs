@@ -30,16 +30,38 @@ namespace Excel_Database_Migration.SQLGeneration
             string sqlPath = pathWOExtension + ".sql";
             Console.WriteLine("sqlPath is: " + sqlPath);
             string sqlContent = new SQLBuilder(csv, filename, filename+"Table", datatypePath).
-                createSchema().dropTable().createUse().createTable().createInsert().build();
+                createDatabase().dropTable().createUse().createTable().createInsert().build();
 
-            populateDatabaseFromSql(sqlContent, filename);
             //write sql to file
             System.IO.File.WriteAllText(sqlPath, sqlContent);
+            string[] lines = sqlContent.Split('\n');
+            createDatabaseFromSql(lines, filename);
+            populateDatabaseFromSql(lines, filename);
         }
 
         public static string createConnectionStringFromDbName(string dbName)
         {
-            return string.Format("Server=localhost;Integrated security=True;database={0}", dbName); 
+            return string.Format("Server=localhost;Integrated security=True;database={0}", dbName);
+        }
+
+        private static void createDatabaseFromSql(string[] lines, string dbName)
+        {
+            string connectionString ="Server=localhost;Integrated security=True";
+            SqlConnection connection = new SqlConnection(connectionString);
+            connection.Open();
+            SqlCommand command = null;
+            try
+            {
+                command = new SqlCommand(lines[0], connection);
+                command.ExecuteNonQuery();
+            }
+            catch (System.Exception e)
+            {
+                MessageBox.Show(command.CommandText, ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            connection.Close();
+            
         }
         
         /// <summary>
@@ -48,19 +70,19 @@ namespace Excel_Database_Migration.SQLGeneration
         /// </summary>
         /// <param name="sqlContent"></param>
         /// <param name="dbName"></param>
-        private static void populateDatabaseFromSql(string sqlContent, string dbName )
+        private static void populateDatabaseFromSql(string[] lines, string dbName )
         {
             string connectionString = createConnectionStringFromDbName(dbName);
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
-            string[] lines = sqlContent.Split('\n');
+            
             foreach (string line in lines)
             {
                 SqlCommand command = null;
                 try
                 {
                     command = new SqlCommand(line, connection);
-                    command.CommandText = line;
+                    //command.CommandText = line;
                     command.ExecuteNonQuery();
                 }
                 catch (System.Exception e)

@@ -37,6 +37,16 @@ namespace Excel_Database_Migration.SQLGeneration
             {
                 return this;
             }
+            builder.Append(String.Format("CREATE SCHEMA {0};\n", schemaName));
+            return this;
+        }
+
+        public SQLBuilder createDatabase()
+        {
+            if (schemaName == "" || schemaName == null)
+            {
+                return this;
+            }
             builder.Append(String.Format("IF NOT EXISTS (select * from sys.databases where name = '{0}') CREATE DATABASE {0};\n", schemaName, schemaName));
             return this;
         }
