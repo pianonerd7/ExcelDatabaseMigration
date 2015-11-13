@@ -76,6 +76,7 @@ namespace Excel_Database_Migration.SQLGeneration
         private static void populateDatabaseFromSql(string[] lines, string dbName )
         {
             string connectionString = createConnectionStringFromDbName(dbName);
+            generatedConnectionString = connectionString;
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             
