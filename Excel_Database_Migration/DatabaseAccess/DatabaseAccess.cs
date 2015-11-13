@@ -8,17 +8,6 @@ namespace Excel_Database_Migration.DatabaseAccess
     {
 
         private readonly string _connectionString;
-        private const string CON_STRING ="";
-        
-        
-        /// <summary>
-        /// Default Constructor for the Database class. 
-        /// Automatically connects to Microsoft SQL Server on current computer.
-        /// </summary>
-        public DatabaseAccess() : this(CON_STRING) 
-        {
-  
-        } 
 
         /// <summary>
         /// Constructor overload in case user want's to connect to another server.
