@@ -24,6 +24,7 @@ namespace Excel_Database_Migration.ViewModel
         private ObservableCollection<String> _columnHeader;
         private readonly ICommand _searchCommand;
         private string _searchCriteria;
+        private QueryWrapper _queryWrapper;
 
         #endregion
 
@@ -33,22 +34,39 @@ namespace Excel_Database_Migration.ViewModel
             this._mainWindow = window;
             _columnHeader = new ObservableCollection<string>();
             _searchCommand = new DelegateCommand(ExecuteSearchCommand, CanExecuteCommand);
+            _queryWrapper = new QueryWrapper();
             testData();
             ExtractColumnHeader(_queryData);
         }
 
         private void testData()
         {
-            SqlConnection connection = new SqlConnection(SQLGenerator.ConnectionString);
-            connection.Open();
-            SqlCommand command = new SqlCommand(string.Format("SELECT * FROM {0}", SQLGenerator.Name), connection);
-            SqlDataAdapter adapter = new SqlDataAdapter();
-            DataTable table = new DataTable();
+            _queryWrapper.SelectQuery("*", SQLGenerator._dbName);
+            /*
+            DataTable table = new DataTable("Test");
 
-            adapter.SelectCommand = command;
-            adapter.Fill(table);
-            
-            _queryData = table;
+            table.Columns.Add("Name");
+            table.Columns.Add("Animal");
+            table.Columns.Add("Favorite Number");
+            table.Columns.Add("Fruit");
+
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
+            table.Rows.Add("Bob", "Dog", "100", "Banana");
+            table.Rows.Add("John", "cat", "200", "apple");
+            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
+           
+            _queryData = table; */
         }
 
         #endregion

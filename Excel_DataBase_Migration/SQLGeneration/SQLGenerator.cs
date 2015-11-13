@@ -12,14 +12,12 @@ namespace Excel_Database_Migration.SQLGeneration
 {
     public class SQLGenerator
     {
-        private static string generatedConnectionString="";
-        public static string ConnectionString { get { return generatedConnectionString; } }
-        private static string name;
-        public static string Name { get { return name; } }
+        public static string _dbName;
 
         public static void generate (string xlsxPath, string datatypePath = null)
         {
             string filename = Path.GetFileNameWithoutExtension(xlsxPath);
+            _dbName = filename;
             string pathWOExtension = Path.GetDirectoryName(xlsxPath)+ "\\" + filename;
             
             //convert from xlsx to csv

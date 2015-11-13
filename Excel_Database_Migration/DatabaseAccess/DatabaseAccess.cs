@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using Excel_Database_Migration.SQLGeneration;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace Excel_Database_Migration.DatabaseAccess
@@ -7,7 +8,7 @@ namespace Excel_Database_Migration.DatabaseAccess
     {
 
         private readonly string _connectionString;
-        private const string CON_STRING = "will get filled after i make the other UI...";
+        private const string CON_STRING = SQLGenerator.createConnectionStringFromDbName(SQLGenerator._dbName);
         
         
         /// <summary>
