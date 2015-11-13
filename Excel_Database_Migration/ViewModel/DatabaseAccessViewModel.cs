@@ -1,5 +1,6 @@
 ﻿using Excel_Database_Migration.DatabaseAccess;
 using Excel_Database_Migration.ExcelUtils;
+using Excel_Database_Migration.SQLGeneration;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,6 +23,7 @@ namespace Excel_Database_Migration.ViewModel
         private ObservableCollection<String> _columnHeader;
         private readonly ICommand _searchCommand;
         private string _searchCriteria;
+        private QueryWrapper _queryWrapper;
 
         #endregion
 
@@ -31,12 +33,15 @@ namespace Excel_Database_Migration.ViewModel
             this._mainWindow = window;
             _columnHeader = new ObservableCollection<string>();
             _searchCommand = new DelegateCommand(ExecuteSearchCommand, CanExecuteCommand);
+            _queryWrapper = new QueryWrapper();
             testData();
             ExtractColumnHeader(_queryData);
         }
 
         private void testData()
         {
+            _queryWrapper.SelectQuery("*", SQLGenerator._dbName);
+            /*
             DataTable table = new DataTable("Test");
 
             table.Columns.Add("Name");
@@ -60,7 +65,7 @@ namespace Excel_Database_Migration.ViewModel
             table.Rows.Add("John", "cat", "200", "apple");
             table.Rows.Add("Jerry", "Panda", "300", "pineapple");
            
-            _queryData = table;
+            _queryData = table; */
         }
 
         #endregion
