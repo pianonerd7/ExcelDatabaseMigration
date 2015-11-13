@@ -1,9 +1,11 @@
 ﻿using Excel_Database_Migration.DatabaseAccess;
 using Excel_Database_Migration.ExcelUtils;
+using Excel_Database_Migration.SQLGeneration;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,29 +39,15 @@ namespace Excel_Database_Migration.ViewModel
 
         private void testData()
         {
-            DataTable table = new DataTable("Test");
+            SqlConnection connection = new SqlConnection(SQLGenerator.ConnectionString);
+            connection.Open();
+            SqlCommand command = new SqlCommand(string.Format("SELECT * FROM {0}", SQLGenerator.Name), connection);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
 
-            table.Columns.Add("Name");
-            table.Columns.Add("Animal");
-            table.Columns.Add("Favorite Number");
-            table.Columns.Add("Fruit");
-
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-           
+            adapter.SelectCommand = command;
+            adapter.Fill(table);
+            
             _queryData = table;
         }
 

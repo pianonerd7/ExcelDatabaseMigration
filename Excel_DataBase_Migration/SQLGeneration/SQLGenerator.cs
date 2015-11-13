@@ -12,6 +12,11 @@ namespace Excel_Database_Migration.SQLGeneration
 {
     public class SQLGenerator
     {
+        private static string generatedConnectionString="";
+        public static string ConnectionString { get { return generatedConnectionString; } }
+        private static string name;
+        public static string Name { get { return name; } }
+
         public static void generate (string xlsxPath, string datatypePath = null)
         {
             string filename = Path.GetFileNameWithoutExtension(xlsxPath);
@@ -73,6 +78,7 @@ namespace Excel_Database_Migration.SQLGeneration
         private static void populateDatabaseFromSql(string[] lines, string dbName )
         {
             string connectionString = createConnectionStringFromDbName(dbName);
+            generatedConnectionString = connectionString;
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             
