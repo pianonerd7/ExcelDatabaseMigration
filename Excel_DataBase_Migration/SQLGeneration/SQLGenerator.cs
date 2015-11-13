@@ -85,6 +85,10 @@ namespace Excel_Database_Migration.SQLGeneration
             
             foreach (string line in lines)
             {
+                if (line == "")
+                {
+                    continue;
+                }
                 SqlCommand command = null;
                 try
                 {
