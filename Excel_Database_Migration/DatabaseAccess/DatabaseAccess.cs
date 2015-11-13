@@ -33,7 +33,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         /// Establish and open connection with SQL server.
         /// </summary>
         /// <returns></returns>
-        private static SqlConnection ConnectToSql() {
+        private SqlConnection ConnectToSql() {
 
             SqlConnection connection = new SqlConnection(_connectionString);
             connection.Open();
