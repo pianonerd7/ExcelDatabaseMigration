@@ -61,7 +61,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         /// </summary>
         /// <param name="query"></param>
         /// <returns>Return the number of rows affected</returns>
-        protected int GetNonQuery(string query) {
+        public int GetNonQuery(string query) {
 
             int nonQuery = -1;
 

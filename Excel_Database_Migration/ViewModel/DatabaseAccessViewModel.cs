@@ -56,31 +56,6 @@ namespace Excel_Database_Migration.ViewModel
                 MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             _queryData = table;
-            /*
-            DataTable table = new DataTable("Test");
-
-            table.Columns.Add("Name");
-            table.Columns.Add("Animal");
-            table.Columns.Add("Favorite Number");
-            table.Columns.Add("Fruit");
-
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-            table.Rows.Add("Bob", "Dog", "100", "Banana");
-            table.Rows.Add("John", "cat", "200", "apple");
-            table.Rows.Add("Jerry", "Panda", "300", "pineapple");
-           
-            _queryData = table; */
         }
 
         #endregion
@@ -157,10 +132,7 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteSearchCommand(object obj)
         {
-            //TODO INSERT SEARCH QUERY METHOD AND UPDATE DATATABLE
-            QueryWrapper queryWrapper = new QueryWrapper();
-            //queryWrapper.SelectQuery();
-            //_searchCriteria = "";
+            
         }
 
 
