@@ -139,7 +139,7 @@ namespace Excel_Database_Migration.ViewModel
         {
 
             SQLGeneration.SQLGenerator.generate(MigrationFilePath);
-            _mainWindow.Content = new ConfirmationControl();
+            
         }
         #endregion
 

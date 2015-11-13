@@ -54,9 +54,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Controls\ConfirmationControl.xaml.cs">
-      <DependentUpon>ConfirmationControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Controls\DatabaseAccessControl.xaml.cs">
       <DependentUpon>DatabaseAccessControl.xaml</DependentUpon>
     </Compile>
@@ -81,10 +78,6 @@
     <Compile Include="ViewModel\MigrationDataConfigViewModel.cs" />
     <Compile Include="ViewModel\OptionsViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Page Include="Controls\ConfirmationControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Controls\DatabaseAccessControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
