@@ -24,7 +24,6 @@ namespace Excel_Database_Migration.ViewModel
         private ObservableCollection<String> _columnHeader;
         private readonly ICommand _searchCommand;
         private string _searchCriteria;
-        private QueryWrapper _queryWrapper;
 
         #endregion
 
@@ -34,14 +33,29 @@ namespace Excel_Database_Migration.ViewModel
             this._mainWindow = window;
             _columnHeader = new ObservableCollection<string>();
             _searchCommand = new DelegateCommand(ExecuteSearchCommand, CanExecuteCommand);
-            _queryWrapper = new QueryWrapper();
             testData();
             ExtractColumnHeader(_queryData);
         }
 
         private void testData()
         {
-            _queryWrapper.SelectQuery("*", SQLGenerator._dbName);
+            SqlConnection connection = new SqlConnection(SQLGenerator.ConnectionString);
+            connection.Open();
+            SqlCommand command = new SqlCommand(string.Format("SELECT * FROM {0}Table;", SQLGenerator.Name), connection);
+            SqlDataAdapter adapter = new SqlDataAdapter();
+            DataTable table = new DataTable();
+
+            try {
+                adapter.SelectCommand = command;
+                adapter.Fill(table);
+            }
+            catch(System.Exception e)
+            {
+
+                MessageBox.Show(command.CommandText, ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            _queryData = table;
             /*
             DataTable table = new DataTable("Test");
 

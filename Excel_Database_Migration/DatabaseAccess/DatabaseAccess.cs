@@ -8,7 +8,7 @@ namespace Excel_Database_Migration.DatabaseAccess
     {
 
         private readonly string _connectionString;
-        private const string CON_STRING = SQLGenerator.createConnectionStringFromDbName(SQLGenerator._dbName);
+        private const string CON_STRING ="";
         
         
         /// <summary>
