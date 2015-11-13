@@ -140,7 +140,7 @@ namespace Excel_Database_Migration.ViewModel
         private void ExecuteContinueConfigCommand(object obj)
         {
 
-            //SQLGeneration.SQLGenerator.generate(MigrationFilePath);
+            SQLGeneration.SQLGenerator.generate(MigrationFilePath);
             NavigationService navService = NavigationService.GetNavigationService(_mainWindow);
             navService.Navigate(new DatabaseAccessPage());
             
