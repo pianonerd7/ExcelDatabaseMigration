@@ -39,9 +39,9 @@ namespace Excel_Database_Migration.ViewModel
 
         private void testData()
         {
-            SqlConnection connection = new SqlConnection(SQLGenerator.ConnectionString);
+            SqlConnection connection = new SqlConnection(DatabaseInfo.ConnectionString);
             connection.Open();
-            SqlCommand command = new SqlCommand(string.Format("SELECT * FROM {0}Table;", SQLGenerator.Name), connection);
+            SqlCommand command = new SqlCommand(string.Format("SELECT * FROM {0}Table;", DatabaseInfo.DatabaseName), connection);
             SqlDataAdapter adapter = new SqlDataAdapter();
             DataTable table = new DataTable();
 

@@ -63,6 +63,7 @@
     <Compile Include="Controls\SelectConnectionStringControl.xaml.cs">
       <DependentUpon>SelectConnectionStringControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseAccess\DatabaseInfo.cs" />
     <Compile Include="DatabaseAccess\DatabaseAccess.cs" />
     <Compile Include="DatabaseAccess\QueryWrapper.cs" />
     <Compile Include="ExcelUtils\CSVWrapper.cs" />
