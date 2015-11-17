@@ -39,6 +39,13 @@ namespace Excel_Database_Migration.ViewModel
 
         private void testData()
         {
+            QueryWrapper wrapper = new QueryWrapper();
+            DataTable table = wrapper.SelectQuery("*",DatabaseInfo.DatabaseName,"");
+            _queryData = table;
+        }
+
+        private void testDataDemo()
+        {
             SqlConnection connection = new SqlConnection(DatabaseInfo.ConnectionString);
             connection.Open();
             SqlCommand command = new SqlCommand(string.Format("SELECT * FROM {0}Table;", DatabaseInfo.DatabaseName), connection);
