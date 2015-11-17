@@ -58,7 +58,6 @@ namespace Excel_Database_Migration.ViewModel
             }
             catch(System.Exception e)
             {
-
                 MessageBox.Show(command.CommandText, ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
                 MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
             }

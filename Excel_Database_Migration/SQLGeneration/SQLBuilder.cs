@@ -74,7 +74,7 @@ namespace Excel_Database_Migration.SQLGeneration
             {
                 builder.Append(", ");
                 builder.Append(csv.Attributes[i]);
-                builder.Append(" char(255)");
+                builder.Append(" text");
             }
             builder.Append(");\n");
             return this;
