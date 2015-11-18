@@ -35,9 +35,13 @@ namespace Excel_Database_Migration.SQLGeneration
             Console.WriteLine("sqlPath is: " + sqlPath);
             string sqlContent = new SQLBuilder(csv, filename, filename+"Table", datatypePath).
                 createDatabase().dropTable().createUse().createTable().createInsert().build();
+            //make the contents of the connection string file
+            string dbPath = pathWOExtension + ".dbConnection";
+            string dbContent = DatabaseInfo.DatabaseName;
 
             //write sql to file
             System.IO.File.WriteAllText(sqlPath, sqlContent);
+            System.IO.File.WriteAllText(dbPath, dbContent);
             string[] lines = sqlContent.Split('\n');
             createDatabaseFromSql(lines, filename);
             populateDatabaseFromSql(lines, filename);
