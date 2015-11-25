@@ -20,35 +20,7 @@
 
         <TextBlock 
             Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="2"
-            Text="Select Migration File Path" 
-            HorizontalAlignment="Left"
-            VerticalAlignment="Bottom"
-            Margin="10, 0, 0, 0"
-            FontSize="20"/>
-
-        <TextBox Grid.Column="0" Grid.Row="1" 
-                 Height="40" 
-                 HorizontalAlignment="Stretch" 
-                 VerticalAlignment="Stretch"
-                 Margin="10,10,0,0"             
-                 IsEnabled="False"
-                 FontSize="14"
-                 TextAlignment="Left"
-                 TextWrapping="WrapWithOverflow"
-                 Text="{Binding MigrationFilePath}"/>
-
-        <Button Grid.Column="1" Grid.Row="1"
-                Content="Browse" 
-                Height="40"
-                HorizontalAlignment="Stretch" 
-                VerticalAlignment="Center" 
-                Margin="10,10,0,0" 
-                Width="100" 
-                FontSize="14" 
-                Command="{Binding SelectFilePathCommand}"/>
-
-        <TextBlock Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="2" 
-            Text="(Optional) Select Attribute Datatype for Migration File Path" 
+            Text="Please select the file containing your connection string" 
             HorizontalAlignment="Left"
             VerticalAlignment="Bottom"
             Margin="10, 0, 0, 0"

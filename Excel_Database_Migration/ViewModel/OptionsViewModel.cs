@@ -70,7 +70,7 @@ namespace Excel_Database_Migration.ViewModel
         private void ExecuteAccessDatabaseCommand(object obj)
         {
             NavigationService navService = NavigationService.GetNavigationService(_mainWindow);
-            navService.Navigate(new DatabaseAccessPage());
+            navService.Navigate(new SelectConnectionStringPage());
         }
 
         #endregion
