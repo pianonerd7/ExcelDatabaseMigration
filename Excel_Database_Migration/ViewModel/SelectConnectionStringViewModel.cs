@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Excel_Database_Migration.ViewModel
@@ -13,12 +14,20 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Private Declarations
 
-        private ICommand _SelectConStrCommand;
+        private Page _mainWindow;
+        private ICommand _selectConStrCommand;
         private ICommand _continueCommand;
 
         #endregion
 
         #region Constructor
+
+        public SelectConnectionStringViewModel(Page mainWindow)
+        {
+            _mainWindow = mainWindow;
+            _selectConStrCommand = new DelegateCommand(ExecuteSelectConStrCommand, CanExecuteCommand);
+            _continueCommand = new DelegateCommand(ExecuteContinueCommand, CanExecuteCommand);
+        }
 
         #endregion
 
@@ -28,14 +37,26 @@ namespace Excel_Database_Migration.ViewModel
         {
             get
             {
-                return _SelectConStrCommand;
+                return _selectConStrCommand;
             }
         }
 
-        public ICommand 
+        public ICommand ContinueCommand
+        {
+            get
+            {
+                return _continueCommand;
+            }
+        }
+
         #endregion
 
         #region Private Methods
+
+        private bool CanExecuteCommand(object obj)
+        {
+            return true;
+        }
 
         private void ExecuteSelectConStrCommand(object obj)
         {
@@ -49,6 +70,11 @@ namespace Excel_Database_Migration.ViewModel
             {
                 AttributeFilePath = dialog.FileName;
             }
+
+        }
+
+        private void ExecuteContinueCommand(object obj)
+        {
 
         }
 
