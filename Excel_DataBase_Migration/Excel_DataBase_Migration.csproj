@@ -72,6 +72,9 @@
     <Compile Include="Pages\MigrateDataConfigPage.xaml.cs">
       <DependentUpon>MigrateDataConfigPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\SelectConnectionStringPage.xaml.cs">
+      <DependentUpon>SelectConnectionStringPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="ProjectStrings.cs" />
     <Compile Include="SQLGeneration\SQLGenerator.cs" />
     <Compile Include="ExcelUtils\XLSXToCSVConverter.cs" />
@@ -117,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\MigrateDataConfigPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\SelectConnectionStringPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

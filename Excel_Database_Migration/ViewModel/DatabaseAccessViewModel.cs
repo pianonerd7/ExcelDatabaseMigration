@@ -24,6 +24,7 @@ namespace Excel_Database_Migration.ViewModel
         private ObservableCollection<String> _columnHeader;
         private readonly ICommand _searchCommand;
         private string _searchCriteria;
+        private QueryWrapper _queryWrapper;
 
         #endregion
 
@@ -132,7 +133,7 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteSearchCommand(object obj)
         {
-            
+            _queryWrapper.SelectQuery("","","");
         }
 
 
