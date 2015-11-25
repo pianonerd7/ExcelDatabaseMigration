@@ -83,6 +83,7 @@
     <Compile Include="ViewModel\DelegateCommand.cs" />
     <Compile Include="ViewModel\MigrationDataConfigViewModel.cs" />
     <Compile Include="ViewModel\OptionsViewModel.cs" />
+    <Compile Include="ViewModel\SelectConnectionStringViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Page Include="Controls\DatabaseAccessControl.xaml">
       <SubType>Designer</SubType>

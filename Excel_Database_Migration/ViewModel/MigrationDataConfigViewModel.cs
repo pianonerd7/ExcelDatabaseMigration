@@ -39,7 +39,7 @@ namespace Excel_Database_Migration.ViewModel
 
         #endregion 
 
-        #region
+        #region Public Fields
 
         public string MigrationFilePath
         {
