@@ -5,24 +5,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.IO;
 using System.Data.SqlClient;
-using Excel_Database_Migration.ExcelUtils;
 using System.Windows;
+
+using Excel_Database_Migration.ExcelUtils;
+using Excel_Database_Migration.DatabaseAccess;
+
 
 namespace Excel_Database_Migration.SQLGeneration
 {
     public class SQLGenerator
     {
-        private static string generatedConnectionString = "";
-        public static string ConnectionString { get { return generatedConnectionString; } }
-        private static string name;
-        public static string Name { get { return name; } }
-
         public static void generate (string xlsxPath, string datatypePath = null)
         {
             string filename = Path.GetFileNameWithoutExtension(xlsxPath);
             string pathWOExtension = Path.GetDirectoryName(xlsxPath)+ "\\" + filename;
 
-            name = filename;
+            DatabaseInfo.DatabaseName = filename;
             //convert from xlsx to csv
             string csvPath =  pathWOExtension + ".csv";
             Console.WriteLine("csvPath is: " + csvPath);
@@ -37,9 +35,13 @@ namespace Excel_Database_Migration.SQLGeneration
             Console.WriteLine("sqlPath is: " + sqlPath);
             string sqlContent = new SQLBuilder(csv, filename, filename+"Table", datatypePath).
                 createDatabase().dropTable().createUse().createTable().createInsert().build();
+            //make the contents of the connection string file
+            string dbPath = pathWOExtension + ".dbConnection";
+            string dbContent = DatabaseInfo.DatabaseName;
 
             //write sql to file
             System.IO.File.WriteAllText(sqlPath, sqlContent);
+            System.IO.File.WriteAllText(dbPath, dbContent);
             string[] lines = sqlContent.Split('\n');
             createDatabaseFromSql(lines, filename);
             populateDatabaseFromSql(lines, filename);
@@ -79,7 +81,7 @@ namespace Excel_Database_Migration.SQLGeneration
         private static void populateDatabaseFromSql(string[] lines, string dbName )
         {
             string connectionString = createConnectionStringFromDbName(dbName);
-            generatedConnectionString = connectionString;
+            DatabaseInfo.ConnectionString = connectionString;
             SqlConnection connection = new SqlConnection(connectionString);
             connection.Open();
             

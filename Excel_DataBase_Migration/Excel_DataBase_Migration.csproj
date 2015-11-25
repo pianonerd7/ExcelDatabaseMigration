@@ -63,6 +63,7 @@
     <Compile Include="Controls\SelectConnectionStringControl.xaml.cs">
       <DependentUpon>SelectConnectionStringControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DatabaseAccess\DatabaseInfo.cs" />
     <Compile Include="DatabaseAccess\DatabaseAccess.cs" />
     <Compile Include="DatabaseAccess\QueryWrapper.cs" />
     <Compile Include="ExcelUtils\CSVWrapper.cs" />
@@ -76,6 +77,7 @@
       <DependentUpon>SelectConnectionStringPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="ProjectStrings.cs" />
+    <Compile Include="SQLGeneration\ConnectionStringWriter.cs" />
     <Compile Include="SQLGeneration\SQLGenerator.cs" />
     <Compile Include="ExcelUtils\XLSXToCSVConverter.cs" />
     <Compile Include="SQLGeneration\SQLBuilder.cs" />

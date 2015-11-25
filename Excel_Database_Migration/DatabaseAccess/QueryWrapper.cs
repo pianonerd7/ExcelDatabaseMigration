@@ -14,7 +14,7 @@ namespace Excel_Database_Migration.DatabaseAccess
 
         public QueryWrapper()
         {
-            dbAccess = new DatabaseAccess(SQLGenerator.createConnectionStringFromDbName(SQLGenerator.Name)); //need to insert connection string to constructor
+            dbAccess = new DatabaseAccess(SQLGenerator.createConnectionStringFromDbName(DatabaseInfo.DatabaseName)); //need to insert connection string to constructor
         }
 
         #region Query Methods
@@ -22,7 +22,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         public DataTable SelectQuery(string select, string dbName, string condition)
         {
             string query = 
-                String.Format("SELECT {0} FROM dbo.{1} {2}", select, dbName, condition);
+                String.Format("SELECT {0} FROM {1}Table {2}", select, dbName, condition);
             
             return dbAccess.GetQuery(query);
             
