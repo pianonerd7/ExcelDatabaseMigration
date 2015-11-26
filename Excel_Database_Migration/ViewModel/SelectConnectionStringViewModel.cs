@@ -1,4 +1,5 @@
-﻿using Microsoft.Win32;
+﻿using Excel_Database_Migration.Pages;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 
 namespace Excel_Database_Migration.ViewModel
 {
@@ -89,7 +91,8 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteContinueCommand(object obj)
         {
-
+            NavigationService navService = NavigationService.GetNavigationService(_mainWindow);
+            navService.Navigate(new DatabaseAccessPage());
         }
 
         #endregion
