@@ -15,6 +15,7 @@ namespace Excel_Database_Migration.ViewModel
         #region Private Declarations
 
         private Page _mainWindow;
+        private string _connectionStringFilePath;
         private ICommand _selectConStrCommand;
         private ICommand _continueCommand;
 
@@ -32,6 +33,19 @@ namespace Excel_Database_Migration.ViewModel
         #endregion
 
         #region Public Fields
+
+        public string ConnectionStringFilePath
+        {
+            get
+            {
+                return _connectionStringFilePath;
+            }
+            set
+            {
+                _connectionStringFilePath = value;
+                OnPropertyChanged("ConnectionStringFilePath");
+            }
+        }
 
         public ICommand SelectConStrCommand
         {
@@ -63,12 +77,12 @@ namespace Excel_Database_Migration.ViewModel
 
             OpenFileDialog dialog = new OpenFileDialog();
 
-            dialog.Filter = "CSV Files|*.csv";
+            dialog.Filter = "Text Files|*.txt";
             Nullable<bool> result = dialog.ShowDialog();
 
             if (result == true)
             {
-                AttributeFilePath = dialog.FileName;
+                ConnectionStringFilePath = dialog.FileName;
             }
 
         }

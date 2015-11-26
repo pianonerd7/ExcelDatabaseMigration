@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Excel_Database_Migration.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Excel_Database_Migration.Pages
     {
         public SelectConnectionStringPage()
         {
+            DataContext = new SelectConnectionStringViewModel(this);
             InitializeComponent();
         }
     }

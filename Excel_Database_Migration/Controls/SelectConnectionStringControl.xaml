@@ -35,7 +35,7 @@
                  FontSize="14"
                  TextAlignment="Left"
                  TextWrapping="WrapWithOverflow"
-                 Text="{Binding AttributeFilePath}"/>
+                 Text="{Binding ConnectionStringFilePath}"/>
 
         <Button Grid.Column="1" Grid.Row="3"
                 Content="Browse" 
@@ -45,7 +45,7 @@
                 Margin="10,10,0,0" 
                 Width="100" 
                 FontSize="14" 
-                Command="{Binding SelectAttributeFilePathCommands}"/>
+                Command="{Binding SelectConStrCommand}"/>
 
         <Button Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2"
                 Content="Continue"
@@ -55,6 +55,6 @@
                 Margin="10"
                 Width="200" 
                 FontSize="14"
-                Command="{Binding ContinueConfigCommand}"/>
+                Command="{Binding ContinueCommand}"/>
     </Grid>
 </UserControl>
