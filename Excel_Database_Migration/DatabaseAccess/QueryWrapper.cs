@@ -31,7 +31,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         public int DeleteQuery(string dbName, string condition)
         {
             string query =
-                String.Format("DELETE FROM {0} WHERE {1}", dbName, condition);
+                String.Format("DELETE FROM {0}Table WHERE {1}", dbName, condition);
 
             return dbAccess.GetNonQuery(query);
         }
