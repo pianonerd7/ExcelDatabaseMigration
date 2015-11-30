@@ -36,7 +36,7 @@ namespace Excel_Database_Migration.SQLGeneration
             string sqlContent = new SQLBuilder(csv, filename, filename+"Table", datatypePath).
                 createDatabase().dropTable().createUse().createTable().createInsert().build();
             //make the contents of the connection string file
-            string dbPath = pathWOExtension + ".dbConnection";
+            string dbPath = pathWOExtension + ProjectStrings.CONNECTION_STRING_FILE_EXTENSION;
             string dbContent = DatabaseInfo.DatabaseName;
 
             //write sql to file

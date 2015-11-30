@@ -79,7 +79,7 @@ namespace Excel_Database_Migration.ViewModel
 
             OpenFileDialog dialog = new OpenFileDialog();
 
-            dialog.Filter = "Text Files|*.txt";
+            dialog.Filter = "Database Connection Files|*"+ProjectStrings.CONNECTION_STRING_FILE_EXTENSION;
             Nullable<bool> result = dialog.ShowDialog();
 
             if (result == true)
