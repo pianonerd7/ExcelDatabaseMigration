@@ -68,6 +68,7 @@
             Width="180"
             FontSize="20"
             HorizontalAlignment="Right"
-            Content="Export Database" />
+            Content="Export Database" 
+            Command="{Binding ExportCommand}"/>
     </Grid>
 </UserControl>
