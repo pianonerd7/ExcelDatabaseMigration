@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
+using Excel_Database_Migration.DatabaseAccess;
+using System.IO;
 
 namespace Excel_Database_Migration.ViewModel
 {
@@ -85,6 +87,8 @@ namespace Excel_Database_Migration.ViewModel
             if (result == true)
             {
                 ConnectionStringFilePath = dialog.FileName;
+                string[] fileContent = File.ReadAllLines(dialog.FileName);
+                DatabaseInfo.DatabaseName = fileContent[0];
             }
 
         }

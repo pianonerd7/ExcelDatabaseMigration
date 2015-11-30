@@ -36,24 +36,26 @@ namespace Excel_Database_Migration.DatabaseAccess
         /// <param name="query"></param>
         /// <returns>Return a datatable of queries results</returns>
         public DataTable GetQuery(string query) {
-
+            DataTable queryResult = null;
             using (SqlConnection connection = ConnectToSql()) {
                 using (SqlDataAdapter adapter = new SqlDataAdapter()) {
 
                     try {
                         SqlCommand command = new SqlCommand(query, connection);
-                        DataTable queryResult = new DataTable();
+                        queryResult= new DataTable();
 
                         adapter.SelectCommand = command;
                         adapter.Fill(queryResult);
-
-                        return queryResult;
                     }
-
+                    catch(System.Exception e)
+                    {
+                        System.Console.WriteLine(e.ToString());
+                    }
                     finally {
                     }
                 }
             }
+            return queryResult;
         }
 
         /// <summary>
@@ -72,7 +74,10 @@ namespace Excel_Database_Migration.DatabaseAccess
                 try {
                     nonQuery = command.ExecuteNonQuery();
                 }
-
+                catch (System.Exception e)
+                {
+                    System.Console.WriteLine(e.ToString());
+                }
                 finally {  
                 }
 
