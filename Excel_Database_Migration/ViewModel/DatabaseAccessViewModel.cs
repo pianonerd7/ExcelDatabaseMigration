@@ -23,6 +23,7 @@ namespace Excel_Database_Migration.ViewModel
         private DataTable _queryData;
         private ObservableCollection<String> _columnHeader;
         private readonly ICommand _searchCommand;
+        private readonly ICommand _exportCommand;
         private string _searchCriteria;
         private QueryWrapper _queryWrapper;
 
@@ -34,6 +35,7 @@ namespace Excel_Database_Migration.ViewModel
             this._mainWindow = window;
             _columnHeader = new ObservableCollection<string>();
             _searchCommand = new DelegateCommand(ExecuteSearchCommand, CanExecuteCommand);
+            _exportCommand = new DelegateCommand(ExecuteExportCommand, CanExecuteExportCommand);
             testData();
             ExtractColumnHeader(_queryData);
         }
@@ -110,6 +112,14 @@ namespace Excel_Database_Migration.ViewModel
             }
         }
 
+        public ICommand ExportCommand
+        {
+            get
+            {
+                return _exportCommand;
+            }
+        }
+
         #endregion
 
         #region Private Methods
@@ -142,7 +152,15 @@ namespace Excel_Database_Migration.ViewModel
             _queryWrapper.SelectQuery("","","");
         }
 
+        private bool CanExecuteExportCommand(object obj)
+        {
+            return true;
+        }
 
+        private void ExecuteExportCommand(object obj)
+        {
+
+        }
         #endregion
 
     }
