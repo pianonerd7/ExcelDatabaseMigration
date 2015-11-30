@@ -63,5 +63,11 @@
             Grid.Row="2"
             HorizontalAlignment="Stretch"
             ItemsSource="{Binding QueryData}"/>
+        <Button 
+            Grid.Row="3"
+            Width="180"
+            FontSize="20"
+            HorizontalAlignment="Right"
+            Content="Export Database" />
     </Grid>
 </UserControl>
