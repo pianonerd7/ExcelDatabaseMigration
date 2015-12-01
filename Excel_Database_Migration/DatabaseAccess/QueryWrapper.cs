@@ -44,11 +44,12 @@ namespace Excel_Database_Migration.DatabaseAccess
             return dbAccess.GetNonQuery(query);
         }
 
-        public int UpdateQuery(string tableName, string parameters, string newValues)
+        public int UpdateQuery(string tableName, string parameters, string newValues, string rowID)
         {
             string query =
-                String.Format("UPDATE dbo.{0} SET {1} where {2}", tableName, parameters, newValues);
-            
+                String.Format("UPDATE {0}Table SET {1}='{2}' WHERE RowID='{3}'", tableName, parameters, newValues, rowID);
+            Console.WriteLine("query is: " + query);
+
             return dbAccess.GetNonQuery(query);
         }
         #endregion
