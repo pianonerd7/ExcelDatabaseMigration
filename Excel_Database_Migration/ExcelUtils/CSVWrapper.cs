@@ -35,6 +35,11 @@ namespace Excel_Database_Migration.ExcelUtils
             get { return this.data; }
         }
 
+        public void addRow(string[] row)
+        {
+            data.Add(row);
+        }
+
         public void openCSV(string path)
         {
             if (!File.Exists(path))
