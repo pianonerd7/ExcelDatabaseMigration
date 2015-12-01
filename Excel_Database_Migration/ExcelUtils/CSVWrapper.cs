@@ -48,5 +48,21 @@ namespace Excel_Database_Migration.ExcelUtils
                 }
             }
         }
+
+        public void writeCSV(string path)
+        {
+            if (File.Exists(path))
+            {
+                File.Delete(path);
+            }
+            List<String> csvFileContent = new List<string>();
+            csvFileContent.Add(string.Join(",", attributes));
+            foreach(string[] line in data)
+            {
+                csvFileContent.Add(string.Join(",", line));
+            }
+
+            File.WriteAllLines(path, csvFileContent.ToArray<string>());
+        }
     }
 }
