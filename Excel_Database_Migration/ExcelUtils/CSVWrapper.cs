@@ -19,6 +19,12 @@ namespace Excel_Database_Migration.ExcelUtils
             data = new List<string[]>();
         }
         
+        public CSVWrapper(string[] attributes, List<string[]> data)
+        {
+            this.attributes = attributes;
+            this.data = data;
+        }
+
         public string[] Attributes
         {
             get { return this.attributes; }
