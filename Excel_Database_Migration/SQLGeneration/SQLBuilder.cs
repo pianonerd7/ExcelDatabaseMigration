@@ -86,7 +86,7 @@ namespace Excel_Database_Migration.SQLGeneration
             for (int i = 0; i<csv.Attributes.Length; i++)
             {
                 builder.Append(", ");
-                builder.Append(csv.Attributes[i]);
+                builder.Append(csv.Attributes[i].Replace(" ", "_"));
                 if (datatype == null)
                 {
                     builder.Append(" text");
@@ -153,7 +153,7 @@ namespace Excel_Database_Migration.SQLGeneration
             attributeBuilder.Append("(");
             for (int i = 0; i < csv.Attributes.Length; i++)
             {
-                attributeBuilder.Append(csv.Attributes[i]);
+                attributeBuilder.Append(csv.Attributes[i].Replace(" ", "_"));
                 if (i != csv.Attributes.Length - 1)
                 {
                     attributeBuilder.Append(", ");
