@@ -255,12 +255,6 @@ namespace Excel_Database_Migration.ViewModel
         
         private void ColumnChanged (object sender, DataColumnChangeEventArgs e)
         {
-            Update(e);
-        }
-
-        private void Update(DataColumnChangeEventArgs e)
-        {
-
             _queryWrapper.UpdateQuery(DatabaseInfo.DatabaseName, e.Column.ColumnName, e.Row[e.Column].ToString(), e.Row["RowID"].ToString());
         }
 
