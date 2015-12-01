@@ -22,12 +22,13 @@ namespace Excel_Database_Migration.ViewModel
          #region Private Declaration
 
         private Page _mainWindow;
-        private DataTable _queryData;
+        private DataTable _queryDataTable;
         private ObservableCollection<String> _columnHeader;
         private readonly ICommand _searchCommand;
         private readonly ICommand _exportCommand;
         private string _searchCriteria;
         private QueryWrapper _queryWrapper;
+        private string _attributeString;
 
         #endregion
 
@@ -38,22 +39,37 @@ namespace Excel_Database_Migration.ViewModel
             _columnHeader = new ObservableCollection<string>();
             _searchCommand = new DelegateCommand(ExecuteSearchCommand, CanExecuteCommand);
             _exportCommand = new DelegateCommand(ExecuteExportCommand, CanExecuteExportCommand);
-            testData();
-            ExtractColumnHeader(_queryData);
+            _attributeString = null;
+            InitializeDataTable();
+            ExtractColumnHeader(_queryDataTable);
+            
             // add event handlers
-            _queryData.AcceptChanges();
-            _queryData.RowChanged += new DataRowChangeEventHandler(RowChanged);
-            _queryData.RowDeleted += new DataRowChangeEventHandler(RowDeleted);
+            _queryDataTable.AcceptChanges();
+            _queryDataTable.RowChanged += new DataRowChangeEventHandler(RowChanged);
+            _queryDataTable.RowDeleted += new DataRowChangeEventHandler(RowDeleted);
 
         }
 
-        private void testData()
+        private void InitializeDataTable()
         {
-            QueryWrapper wrapper = new QueryWrapper();
-            DataTable table = wrapper.SelectQuery("*",DatabaseInfo.DatabaseName,"");
-            _queryData = table;
+            _queryWrapper = new QueryWrapper();
+            _queryDataTable = _queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName,"");
+            _attributeString = "";
+            foreach (DataColumn col in _queryDataTable.Columns)
+            {
+                if (col.ColumnName == "RowID")
+                {
+                    continue;
+                }
+                _attributeString += col.ColumnName;
+                _attributeString += ",";
+            }
+            // to get rid of the last comma
+            _attributeString = _attributeString.Substring(0, _attributeString.Length - 1);
+            Console.WriteLine("Attribute string is: " + _attributeString);
         }
 
+        //used for demo @deprecated
         private void testDataDemo()
         {
             SqlConnection connection = new SqlConnection(DatabaseInfo.ConnectionString);
@@ -71,7 +87,7 @@ namespace Excel_Database_Migration.ViewModel
                 MessageBox.Show(command.CommandText, ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
                 MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
             }
-            _queryData = table;
+            _queryDataTable = table;
         }
 
         #endregion
@@ -82,7 +98,7 @@ namespace Excel_Database_Migration.ViewModel
         {
             get
             {
-                return _queryData;
+                return _queryDataTable;
             }
         }
 
@@ -167,7 +183,7 @@ namespace Excel_Database_Migration.ViewModel
         private void ExecuteExportCommand(object obj)
         {
             
-            DataTable table = _queryData;
+            DataTable table = _queryDataTable;
             string savePath ="";
             SaveFileDialog dialog = new SaveFileDialog();
 
@@ -187,8 +203,6 @@ namespace Excel_Database_Migration.ViewModel
 
             MessageBox.Show("Done exporting!", ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
         }
-
-
         #endregion
 
         #region Event Handlers
@@ -196,10 +210,28 @@ namespace Excel_Database_Migration.ViewModel
 
         private void RowChanged(object sender, DataRowChangeEventArgs e)
         {
-            
+
+            Console.WriteLine("Row_Changed Event: name={0}; action={1}",
+e.Row["name"], e.Action);
             switch (e.Action)
             {
                 case DataRowAction.Add:
+                    string value = "";
+                    foreach (DataColumn col in _queryDataTable.Columns)
+                    {
+                        Console.WriteLine("column added is " + e.Row[col]);
+                        if (e.Row[col].ToString().Length == 0)
+                        {
+                            value += "NULL,";
+                            Console.WriteLine("NULL value");
+                        }
+                        else
+                        {
+                            value += string.Format("'{0}',", e.Row[col]);
+                        }
+                    }
+                    value = value.Substring(0, value.Length - 1);
+                    _queryWrapper.InsertQuery(DatabaseInfo.DatabaseName, _attributeString, value);
                     break;
                 case DataRowAction.Change:
                     break;

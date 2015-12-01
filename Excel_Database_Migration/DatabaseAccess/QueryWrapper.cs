@@ -39,7 +39,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         public int InsertQuery(string dbName, string parameters, string values)
         {
             string query = 
-                String.Format("INSERT {0}Table ({1}) VALUES ({1})", dbName, parameters, values);
+                String.Format("INSERT INTO {0}Table ({1}) VALUES ({1})", dbName, parameters, values);
 
             return dbAccess.GetNonQuery(query);
         }
