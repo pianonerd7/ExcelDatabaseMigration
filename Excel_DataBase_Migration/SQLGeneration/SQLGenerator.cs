@@ -18,6 +18,7 @@ namespace Excel_Database_Migration.SQLGeneration
         public static void generate (string xlsxPath, string datatypePath = null)
         {
             string filename = Path.GetFileNameWithoutExtension(xlsxPath);
+            filename = filename.Replace(" ", "_");
             string pathWOExtension = Path.GetDirectoryName(xlsxPath)+ "\\" + filename;
 
             DatabaseInfo.DatabaseName = filename;
