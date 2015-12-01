@@ -40,6 +40,11 @@ namespace Excel_Database_Migration.ViewModel
             _exportCommand = new DelegateCommand(ExecuteExportCommand, CanExecuteExportCommand);
             testData();
             ExtractColumnHeader(_queryData);
+            // add event handlers
+            _queryData.AcceptChanges();
+            _queryData.RowChanged += new DataRowChangeEventHandler(RowChanged);
+            _queryData.RowDeleted += new DataRowChangeEventHandler(RowDeleted);
+
         }
 
         private void testData()
@@ -181,6 +186,43 @@ namespace Excel_Database_Migration.ViewModel
             CSVToXLSXConverter.toXLSX(csvPath, savePath);
 
             MessageBox.Show("Done exporting!", ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
+        }
+
+
+        #endregion
+
+        #region Event Handlers
+        // Event Handlers
+
+        private void RowChanged(object sender, DataRowChangeEventArgs e)
+        {
+            
+            switch (e.Action)
+            {
+                case DataRowAction.Add:
+                    break;
+                case DataRowAction.Change:
+                    break;
+                default:
+                    Console.WriteLine("Illegal action value");
+                    Console.WriteLine("Row_Changed Event: name={0}; action={1}",
+    e.Row["name"], e.Action);
+                    break;
+
+            }
+        }
+
+        private void RowDeleted (object sender, DataRowChangeEventArgs e)
+        {
+            Console.WriteLine("Row_Deleted Event: name={0}; action={1}",
+                e.Row["name", DataRowVersion.Original], e.Action);
+            switch (e.Action)
+            {
+                case DataRowAction.Delete:
+                    break;
+                default:
+                    break;
+            }
         }
         #endregion
 
