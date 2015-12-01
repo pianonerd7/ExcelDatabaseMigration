@@ -139,8 +139,15 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteContinueConfigCommand(object obj)
         {
-
-            SQLGeneration.SQLGenerator.generate(MigrationFilePath);
+            if (AttributeFilePath == null)
+            {
+                SQLGeneration.SQLGenerator.generate(MigrationFilePath);
+            }
+            else
+            {
+                SQLGeneration.SQLGenerator.generate(MigrationFilePath, AttributeFilePath);
+            }
+            
             NavigationService navService = NavigationService.GetNavigationService(_mainWindow);
             navService.Navigate(new DatabaseAccessPage());
             
