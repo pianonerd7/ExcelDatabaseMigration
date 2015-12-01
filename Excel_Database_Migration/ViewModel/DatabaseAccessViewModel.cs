@@ -166,7 +166,7 @@ namespace Excel_Database_Migration.ViewModel
             string savePath ="";
             SaveFileDialog dialog = new SaveFileDialog();
 
-            dialog.Filter = "Excel Files|*.xls;*xlsx;*xlsm";
+            dialog.Filter = "Excel Files|*xlsx";
             Nullable<bool> result = dialog.ShowDialog();
 
             if (result == true)
@@ -179,6 +179,8 @@ namespace Excel_Database_Migration.ViewModel
             DataTableToCSVConverter.convertToCSV(table, csvPath);
 
             CSVToXLSXConverter.toXLSX(csvPath, savePath);
+
+            MessageBox.Show("Done exporting!", ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
         }
         #endregion
 

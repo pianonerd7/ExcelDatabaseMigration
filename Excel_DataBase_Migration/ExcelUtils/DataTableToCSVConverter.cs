@@ -21,7 +21,13 @@ namespace Excel_Database_Migration.ExcelUtils
             csv.Attributes = attributes.ToArray<string>();
             foreach(DataRow row in table.Rows)
             {
-                csv.addRow(row.ItemArray as string[]);
+
+                List<string> dataRow = new List<string>();
+                foreach(DataColumn col in table.Columns)
+                {
+                    dataRow.Add("" + row[col]);
+                }
+                csv.addRow(dataRow.ToArray<string>());
             }
             csv.writeCSV(path);
         }
