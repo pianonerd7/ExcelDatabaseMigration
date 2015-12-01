@@ -183,7 +183,6 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteExportCommand(object obj)
         {
-            
             DataTable table = _queryDataTable;
             string savePath ="";
             SaveFileDialog dialog = new SaveFileDialog();
@@ -223,7 +222,6 @@ namespace Excel_Database_Migration.ViewModel
                     Console.WriteLine("Illegal action value");
                     Console.WriteLine("Row_Changed Event: name={0}; action={1}", e.Row["name"], e.Action);
                     break;
-
             }
         }
 
@@ -273,6 +271,5 @@ namespace Excel_Database_Migration.ViewModel
             }
         }
         #endregion
-
     }
 }
