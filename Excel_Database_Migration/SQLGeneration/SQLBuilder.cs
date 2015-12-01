@@ -19,14 +19,22 @@ namespace Excel_Database_Migration.SQLGeneration
         public SQLBuilder(CSVWrapper csv, string schemaName, string tableName, string datatypePath)
         {
             this.csv = csv;
+            
             this.schemaName = schemaName;
             this.tableName = tableName;
+            CleanNames();
             builder = new StringBuilder();
             datatype = null;
             if (datatypePath != null)
             {
                 datatype = File.ReadAllText(datatypePath).Split(',');
             }
+        }
+
+        private void CleanNames()
+        {
+            schemaName = schemaName.Replace(" ", "_");
+            tableName = tableName.Replace(" ", "_");
         }
         
         public SQLBuilder dropTable()
