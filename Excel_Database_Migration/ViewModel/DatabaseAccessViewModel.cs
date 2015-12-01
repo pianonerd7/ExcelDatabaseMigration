@@ -1,11 +1,13 @@
 ﻿using Excel_Database_Migration.DatabaseAccess;
 using Excel_Database_Migration.ExcelUtils;
 using Excel_Database_Migration.SQLGeneration;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -159,7 +161,24 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteExportCommand(object obj)
         {
+            
+            DataTable table = _queryData;
+            string savePath ="";
+            SaveFileDialog dialog = new SaveFileDialog();
 
+            dialog.Filter = "Excel Files|*.xls;*xlsx;*xlsm";
+            Nullable<bool> result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                savePath = dialog.FileName;
+            }
+            string filename = Path.GetFileNameWithoutExtension(savePath);
+            string csvPath = Path.GetDirectoryName(savePath) + "\\" + filename + ".csv";
+
+            DataTableToCSVConverter.convertToCSV(table, csvPath);
+
+            CSVToXLSXConverter.toXLSX(csvPath, savePath);
         }
         #endregion
 

@@ -28,6 +28,7 @@ namespace Excel_Database_Migration.ExcelUtils
         public string[] Attributes
         {
             get { return this.attributes; }
+            set { this.attributes = value; }
         }
 
         public List<string[]> Data
@@ -70,6 +71,10 @@ namespace Excel_Database_Migration.ExcelUtils
             csvFileContent.Add(string.Join(",", attributes));
             foreach(string[] line in data)
             {
+                if (line == null)
+                {
+                    continue;
+                }
                 csvFileContent.Add(string.Join(",", line));
             }
 

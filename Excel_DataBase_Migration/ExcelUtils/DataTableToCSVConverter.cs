@@ -18,7 +18,7 @@ namespace Excel_Database_Migration.ExcelUtils
             {
                 attributes.Add(dc.ColumnName);
             }
-
+            csv.Attributes = attributes.ToArray<string>();
             foreach(DataRow row in table.Rows)
             {
                 csv.addRow(row.ItemArray as string[]);

@@ -66,7 +66,9 @@
     <Compile Include="DatabaseAccess\DatabaseInfo.cs" />
     <Compile Include="DatabaseAccess\DatabaseAccess.cs" />
     <Compile Include="DatabaseAccess\QueryWrapper.cs" />
+    <Compile Include="ExcelUtils\CSVToXLSXConverter.cs" />
     <Compile Include="ExcelUtils\CSVWrapper.cs" />
+    <Compile Include="ExcelUtils\DataTableToCSVConverter.cs" />
     <Compile Include="Pages\DatabaseAccessPage.xaml.cs">
       <DependentUpon>DatabaseAccessPage.xaml</DependentUpon>
     </Compile>
