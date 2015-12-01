@@ -56,6 +56,7 @@ namespace Excel_Database_Migration.ViewModel
             _queryWrapper = new QueryWrapper();
             _queryDataTable = _queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName,"");
             _attributeString = "";
+            int i = 0;
             foreach (DataColumn col in _queryDataTable.Columns)
             {
                 if (col.ColumnName == "RowID")
@@ -63,10 +64,13 @@ namespace Excel_Database_Migration.ViewModel
                     continue;
                 }
                 _attributeString += col.ColumnName;
-                _attributeString += ", ";
+                if (i < _queryDataTable.Columns.Count - 2) // -2 because there is RowID as well
+                {
+                    _attributeString += ", ";
+                }
+                i++;
             }
             // to get rid of the last comma and space
-            _attributeString = _attributeString.Substring(0, _attributeString.Length - 2);
             Console.WriteLine("Attribute string is: " + _attributeString);
         }
 
@@ -232,21 +236,26 @@ namespace Excel_Database_Migration.ViewModel
             foreach (DataColumn col in _queryDataTable.Columns)
             {
                 Console.WriteLine("column added is " + e.Row[col]);
-                if (i++ == 0)
+                if (i == 0)
                 {
+                    i++;
                     continue;
                 }
                 if (e.Row[col].ToString().Length == 0)
                 {
-                    value += "NULL,";
+                    value += "NULL";
                     Console.WriteLine("NULL value");
                 }
                 else
                 {
-                    value += string.Format("'{0}',", e.Row[col]);
+                    value += string.Format("'{0}'", e.Row[col]);
                 }
+                if (i<_queryDataTable.Columns.Count - 1)
+                {
+                    value += ", ";
+                }
+                i++;
             }
-            value = value.Substring(0, value.Length - 1);
             _queryWrapper.InsertQuery(DatabaseInfo.DatabaseName, _attributeString, value);
         }
         
