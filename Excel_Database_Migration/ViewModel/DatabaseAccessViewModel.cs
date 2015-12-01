@@ -46,6 +46,7 @@ namespace Excel_Database_Migration.ViewModel
             // add event handlers
             _queryDataTable.AcceptChanges();
             _queryDataTable.RowChanged += new DataRowChangeEventHandler(RowChanged);
+            _queryDataTable.ColumnChanged += new DataColumnChangeEventHandler(ColumnChanged);
             _queryDataTable.RowDeleted += new DataRowChangeEventHandler(RowDeleted);
 
         }
@@ -210,7 +211,6 @@ namespace Excel_Database_Migration.ViewModel
 
         private void RowChanged(object sender, DataRowChangeEventArgs e)
         {
-
             Console.WriteLine("RowChanged Event: name={0}; action={1}", e.Row["name"], e.Action);
             switch (e.Action)
             {
@@ -250,6 +250,18 @@ namespace Excel_Database_Migration.ViewModel
             }
             value = value.Substring(0, value.Length - 1);
             _queryWrapper.InsertQuery(DatabaseInfo.DatabaseName, _attributeString, value);
+        }
+        
+        
+        private void ColumnChanged (object sender, DataColumnChangeEventArgs e)
+        {
+            Update(e);
+        }
+
+        private void Update(DataColumnChangeEventArgs e)
+        {
+
+            _queryWrapper.UpdateQuery(DatabaseInfo.DatabaseName, e.Column.ColumnName, e.Row[e.Column].ToString(), e.Row["RowID"].ToString());
         }
 
         private void RowDeleted (object sender, DataRowChangeEventArgs e)
