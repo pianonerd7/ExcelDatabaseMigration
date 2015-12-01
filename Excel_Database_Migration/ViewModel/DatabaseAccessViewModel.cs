@@ -211,42 +211,45 @@ namespace Excel_Database_Migration.ViewModel
         private void RowChanged(object sender, DataRowChangeEventArgs e)
         {
 
-            Console.WriteLine("RowChanged Event: name={0}; action={1}",
-e.Row["name"], e.Action);
+            Console.WriteLine("RowChanged Event: name={0}; action={1}", e.Row["name"], e.Action);
             switch (e.Action)
             {
                 case DataRowAction.Add:
-                    string value = "";
-                    int i = 0;
-                    foreach (DataColumn col in _queryDataTable.Columns)
-                    {
-                        Console.WriteLine("column added is " + e.Row[col]);
-                        if (i++ == 0)
-                        {
-                            continue;
-                        }
-                        if (e.Row[col].ToString().Length == 0)
-                        {
-                            value += "NULL,";
-                            Console.WriteLine("NULL value");
-                        }
-                        else
-                        {
-                            value += string.Format("'{0}',", e.Row[col]);
-                        }
-                    }
-                    value = value.Substring(0, value.Length - 1);
-                    _queryWrapper.InsertQuery(DatabaseInfo.DatabaseName, _attributeString, value);
+                    Insert(e);
                     break;
                 case DataRowAction.Change:
                     break;
                 default:
                     Console.WriteLine("Illegal action value");
-                    Console.WriteLine("Row_Changed Event: name={0}; action={1}",
-    e.Row["name"], e.Action);
+                    Console.WriteLine("Row_Changed Event: name={0}; action={1}", e.Row["name"], e.Action);
                     break;
 
             }
+        }
+
+        private void Insert(DataRowChangeEventArgs e)
+        {
+            string value = "";
+            int i = 0;
+            foreach (DataColumn col in _queryDataTable.Columns)
+            {
+                Console.WriteLine("column added is " + e.Row[col]);
+                if (i++ == 0)
+                {
+                    continue;
+                }
+                if (e.Row[col].ToString().Length == 0)
+                {
+                    value += "NULL,";
+                    Console.WriteLine("NULL value");
+                }
+                else
+                {
+                    value += string.Format("'{0}',", e.Row[col]);
+                }
+            }
+            value = value.Substring(0, value.Length - 1);
+            _queryWrapper.InsertQuery(DatabaseInfo.DatabaseName, _attributeString, value);
         }
 
         private void RowDeleted (object sender, DataRowChangeEventArgs e)
