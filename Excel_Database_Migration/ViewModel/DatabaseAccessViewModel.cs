@@ -265,8 +265,10 @@ namespace Excel_Database_Migration.ViewModel
             switch (e.Action)
             {
                 case DataRowAction.Delete:
+                    _queryWrapper.DeleteQuery(DatabaseInfo.DatabaseName, string.Format("RowID = {0}", e.Row["RowId", DataRowVersion.Original]));
                     break;
                 default:
+                    Console.WriteLine("Illegal action value for Delete");
                     break;
             }
         }
