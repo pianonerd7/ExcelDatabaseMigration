@@ -62,10 +62,10 @@ namespace Excel_Database_Migration.ViewModel
                     continue;
                 }
                 _attributeString += col.ColumnName;
-                _attributeString += ",";
+                _attributeString += ", ";
             }
-            // to get rid of the last comma
-            _attributeString = _attributeString.Substring(0, _attributeString.Length - 1);
+            // to get rid of the last comma and space
+            _attributeString = _attributeString.Substring(0, _attributeString.Length - 2);
             Console.WriteLine("Attribute string is: " + _attributeString);
         }
 
@@ -211,15 +211,20 @@ namespace Excel_Database_Migration.ViewModel
         private void RowChanged(object sender, DataRowChangeEventArgs e)
         {
 
-            Console.WriteLine("Row_Changed Event: name={0}; action={1}",
+            Console.WriteLine("RowChanged Event: name={0}; action={1}",
 e.Row["name"], e.Action);
             switch (e.Action)
             {
                 case DataRowAction.Add:
                     string value = "";
+                    int i = 0;
                     foreach (DataColumn col in _queryDataTable.Columns)
                     {
                         Console.WriteLine("column added is " + e.Row[col]);
+                        if (i++ == 0)
+                        {
+                            continue;
+                        }
                         if (e.Row[col].ToString().Length == 0)
                         {
                             value += "NULL,";
