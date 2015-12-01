@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Excel_Database_Migration.ExcelUtils;
+using System.IO;
 
 namespace Excel_Database_Migration.SQLGeneration
 {
@@ -12,7 +13,7 @@ namespace Excel_Database_Migration.SQLGeneration
         private CSVWrapper csv;
         private string schemaName;
         private string tableName;
-        private string datatypePath;
+        private string[] datatype;
         private StringBuilder builder;
 
         public SQLBuilder(CSVWrapper csv, string schemaName, string tableName, string datatypePath)
@@ -20,8 +21,12 @@ namespace Excel_Database_Migration.SQLGeneration
             this.csv = csv;
             this.schemaName = schemaName;
             this.tableName = tableName;
-            this.datatypePath = datatypePath;
             builder = new StringBuilder();
+            datatype = null;
+            if (datatypePath != null)
+            {
+                datatype = File.ReadAllText(datatypePath).Split(',');
+            }
         }
         
         public SQLBuilder dropTable()
@@ -74,7 +79,14 @@ namespace Excel_Database_Migration.SQLGeneration
             {
                 builder.Append(", ");
                 builder.Append(csv.Attributes[i]);
-                builder.Append(" text");
+                if (datatype == null)
+                {
+                    builder.Append(" text");
+                }
+                else
+                {
+                    builder.Append(" " + datatype[i]);
+                }
             }
             builder.Append(");\n");
             return this;
