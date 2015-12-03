@@ -193,7 +193,6 @@ namespace Excel_Database_Migration.ViewModel
 
         private void ExecuteSearchCommand(object obj)
         {
-            Console.WriteLine("search command executed");
             Console.WriteLine(string.Format("search criteria was: {0}", SearchCriteria));
             if (_selectedOption == null)
             {
@@ -203,9 +202,9 @@ namespace Excel_Database_Migration.ViewModel
             {
                 Console.WriteLine(string.Format("Selected item was: {0}", _selectedOption.ToString()));
             }
-            // cleanse the search criteria first
-
-            //_queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName, SearchCriteria);
+            // Gets the proper data table, but can't refresh the data grid view
+            _queryDataTable = _queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName, SelectedOption.ToString(), string.Format("%{0}%", SearchCriteria));
+            Console.WriteLine("search command executed");
         }
 
         private bool CanExecuteExportCommand(object obj)
