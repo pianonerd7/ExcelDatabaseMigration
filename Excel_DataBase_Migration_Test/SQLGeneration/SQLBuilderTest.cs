@@ -120,7 +120,11 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
             Assert.AreEqual("INSERT INTO Employee(Name, Gender, Salary) VALUES ('Serena', 'F', '50');", insertLines[3]);
         }
 
+        //TODO
         [TestMethod]
-        public void Create
+        public void CreateDirtyInsertTest()
+        {
+
+        }
     }
 }
