@@ -19,7 +19,7 @@ namespace Excel_Database_Migration.ViewModel
 {
     public class DatabaseAccessViewModel : ViewModelBase
     {
-         #region Private Declaration
+        #region Private Declaration
 
         private Page _mainWindow;
         private DataTable _queryDataTable;
