@@ -138,10 +138,6 @@ namespace Excel_Database_Migration_Test.DatabaseAccess
         {
             SQLGenerator.generateFromSql(FormatPath.formatPath("testDB.sql"));
         }
-
-        private void Populate()
-        {
-
-        }
+        
     }
 }
