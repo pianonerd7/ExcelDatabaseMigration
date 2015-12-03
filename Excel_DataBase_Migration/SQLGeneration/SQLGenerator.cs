@@ -70,7 +70,6 @@ namespace Excel_Database_Migration.SQLGeneration
                 MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             connection.Close();
-            
         }
         
         /// <summary>
@@ -96,7 +95,6 @@ namespace Excel_Database_Migration.SQLGeneration
                 try
                 {
                     command = new SqlCommand(line, connection);
-                    //command.CommandText = line;
                     command.ExecuteNonQuery();
                 }
                 catch (System.Exception e)
