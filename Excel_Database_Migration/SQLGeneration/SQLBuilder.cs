@@ -33,8 +33,8 @@ namespace Excel_Database_Migration.SQLGeneration
 
         private void CleanNames()
         {
-            schemaName = schemaName.Replace(" ", "_");
-            tableName = tableName.Replace(" ", "_");
+            schemaName = CleanString(schemaName);
+            tableName = CleanString(tableName);
         }
         
         public SQLBuilder dropTable()
@@ -91,7 +91,7 @@ namespace Excel_Database_Migration.SQLGeneration
             for (int i = 0; i<csv.Attributes.Length; i++)
             {
                 builder.Append(", ");
-                builder.Append(csv.Attributes[i].Replace(" ", "_"));
+                builder.Append(CleanString(csv.Attributes[i]));
                 if (datatype == null)
                 {
                     builder.Append(" text");
@@ -158,7 +158,7 @@ namespace Excel_Database_Migration.SQLGeneration
             attributeBuilder.Append("(");
             for (int i = 0; i < csv.Attributes.Length; i++)
             {
-                attributeBuilder.Append(csv.Attributes[i].Replace(" ", "_"));
+                attributeBuilder.Append(CleanString(csv.Attributes[i]));
                 if (i != csv.Attributes.Length - 1)
                 {
                     attributeBuilder.Append(", ");
@@ -172,5 +172,17 @@ namespace Excel_Database_Migration.SQLGeneration
         {
             return builder.ToString();
         }
+
+        /// <summary>
+        /// 
+        /// Gets rid of dirty characters like μ
+        /// </summary>
+        /// <param name="dirty"></param>
+        /// <returns></returns>
+        private string CleanString(string dirty)
+        {
+            return dirty.Replace("\\W", "").Replace(" ", "_");
+        }
+        
     }
 }
