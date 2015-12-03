@@ -277,15 +277,16 @@ namespace Excel_Database_Migration.ViewModel
             foreach (DataColumn col in _queryDataTable.Columns)
             {
                 Console.WriteLine("column added is " + e.Row[col]);
+                // 1st column is RowID, no need to insert that
                 if (i == 0)
                 {
                     i++;
                     continue;
                 }
+                // Blank field, enter as null
                 if (e.Row[col].ToString().Length == 0)
                 {
                     value += "NULL";
-                    Console.WriteLine("NULL value");
                 }
                 else
                 {
