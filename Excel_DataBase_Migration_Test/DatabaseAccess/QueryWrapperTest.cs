@@ -125,7 +125,7 @@ namespace Excel_Database_Migration_Test.DatabaseAccess
             Assert.AreEqual(2, table.Rows.Count);
             Assert.AreEqual("Tom", table.Rows[0]["Name"].ToString());
             Assert.AreEqual("", table.Rows[0]["Gender"].ToString());
-            Assert.AreEqual("80", table.Rows[0]["Salary"].ToString());
+            Assert.AreEqual("84", table.Rows[0]["Salary"].ToString());
 
 
             Assert.AreEqual("Teresa", table.Rows[1]["Name"].ToString());
