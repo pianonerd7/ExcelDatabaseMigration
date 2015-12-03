@@ -208,7 +208,7 @@ namespace Excel_Database_Migration.ViewModel
                 Console.WriteLine(string.Format("Selected item was: {0}", _selectedOption.ToString()));
             }
             // Gets the proper data table, but can't refresh the data grid view
-            _queryDataTable = _queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName, SelectedOption.ToString(), string.Format("%{0}%", SearchCriteria));
+            QueryData = _queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName, SelectedOption.ToString(), string.Format("%{0}%", SearchCriteria));
             Console.WriteLine("search command executed");
         }
 
