@@ -57,24 +57,30 @@ namespace Excel_Database_Migration.ViewModel
         private void InitializeDataTable()
         {
             _queryWrapper = new QueryWrapper();
-            _queryDataTable = _queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName);
+            FormatAttributeString();
+            _queryDataTable = _queryWrapper.SelectQuery(_attributeString, DatabaseInfo.DatabaseName);
+            // to get rid of the last comma and space
+            Console.WriteLine("Attribute string is: " + _attributeString);
+        }
+
+        private void FormatAttributeString()
+        {
+            DataTable wholeTable = _queryWrapper.SelectQuery("*", DatabaseInfo.DatabaseName);
             _attributeString = "";
             int i = 0;
-            foreach (DataColumn col in _queryDataTable.Columns)
+            foreach (DataColumn col in wholeTable.Columns)
             {
                 if (col.ColumnName == "RowID")
                 {
                     continue;
                 }
                 _attributeString += col.ColumnName;
-                if (i < _queryDataTable.Columns.Count - 2) // -2 because there is RowID as well
+                if (i < wholeTable.Columns.Count - 2) // -2 because there is RowID as well
                 {
                     _attributeString += ", ";
                 }
                 i++;
             }
-            // to get rid of the last comma and space
-            Console.WriteLine("Attribute string is: " + _attributeString);
         }
 
         //used for demo @deprecated
@@ -246,7 +252,6 @@ namespace Excel_Database_Migration.ViewModel
 
         private void RowChanged(object sender, DataRowChangeEventArgs e)
         {
-            Console.WriteLine("RowChanged Event: name={0}; action={1}", e.Row["name"], e.Action);
             switch (e.Action)
             {
                 case DataRowAction.Add:
@@ -254,9 +259,13 @@ namespace Excel_Database_Migration.ViewModel
                     break;
                 case DataRowAction.Change:
                     break;
+                case DataRowAction.Delete:
+                    break;
+                case DataRowAction.Commit:
+                    break;
                 default:
                     Console.WriteLine("Illegal action value");
-                    Console.WriteLine("Row_Changed Event: name={0}; action={1}", e.Row["name"], e.Action);
+                    Console.WriteLine("Row_Changed Event: action={0}", e.Action);
                     break;
             }
         }
@@ -289,12 +298,20 @@ namespace Excel_Database_Migration.ViewModel
                 i++;
             }
             _queryWrapper.InsertQuery(DatabaseInfo.DatabaseName, _attributeString, value);
+            QueryData.AcceptChanges();
         }
         
         
         private void ColumnChanged (object sender, DataColumnChangeEventArgs e)
         {
+            if (e.Column.ColumnName == "RowID")
+            {
+                MessageBox.Show("You cannot change the RowID", ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
+                QueryData.RejectChanges();
+                return;
+            }
             _queryWrapper.UpdateQuery(DatabaseInfo.DatabaseName, e.Column.ColumnName, e.Row[e.Column].ToString(), e.Row["RowID"].ToString());
+            QueryData.AcceptChanges();
         }
 
         private void RowDeleted (object sender, DataRowChangeEventArgs e)
@@ -310,6 +327,7 @@ namespace Excel_Database_Migration.ViewModel
                     Console.WriteLine("Illegal action value for Delete");
                     break;
             }
+            QueryData.AcceptChanges();
         }
         #endregion
     }
