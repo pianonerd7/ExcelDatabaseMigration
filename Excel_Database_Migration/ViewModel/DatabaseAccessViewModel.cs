@@ -24,11 +24,13 @@ namespace Excel_Database_Migration.ViewModel
         private Page _mainWindow;
         private DataTable _queryDataTable;
         private ObservableCollection<String> _columnHeader;
+        private Object _selectedOption;
         private readonly ICommand _searchCommand;
         private readonly ICommand _exportCommand;
         private string _searchCriteria;
         private QueryWrapper _queryWrapper;
         private string _attributeString;
+        
 
         #endregion
 
@@ -37,7 +39,8 @@ namespace Excel_Database_Migration.ViewModel
         {
             this._mainWindow = window;
             _columnHeader = new ObservableCollection<string>();
-            _searchCommand = new DelegateCommand(ExecuteSearchCommand, CanExecuteCommand);
+            _selectedOption = null;
+            _searchCommand = new DelegateCommand(ExecuteSearchCommand, CanExecuteSearchCommand);
             _exportCommand = new DelegateCommand(ExecuteExportCommand, CanExecuteExportCommand);
             _attributeString = null;
             InitializeDataTable();
@@ -115,6 +118,19 @@ namespace Excel_Database_Migration.ViewModel
             }
         }
 
+        public Object SelectedOption
+        {
+            get
+            {
+                return _selectedOption;
+            }
+            set
+            {
+                _selectedOption = value;
+                OnPropertyChanged("SelectedOption");
+            }
+        }
+
         public string SearchCriteria
         {
             get
@@ -170,14 +186,26 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Private Methods
 
-        private bool CanExecuteCommand(object obj)
+        private bool CanExecuteSearchCommand(object obj)
         {
             return true;
         }
 
         private void ExecuteSearchCommand(object obj)
         {
-            _queryWrapper.SelectQuery("","","");
+            Console.WriteLine("search command executed");
+            Console.WriteLine(string.Format("search criteria was: {0}", SearchCriteria));
+            if (_selectedOption == null)
+            {
+                Console.WriteLine("selectedItem was null");
+            }
+            else
+            {
+                Console.WriteLine(string.Format("Selected item was: {0}", _selectedOption.ToString()));
+            }
+            // cleanse the search criteria first
+
+            //_queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName, SearchCriteria);
         }
 
         private bool CanExecuteExportCommand(object obj)
