@@ -33,7 +33,7 @@
             <TextBlock 
                 Grid.Row="0" 
                 Grid.ColumnSpan="2"
-                Text="Please select from the drop down the column you wish to search from, and enter search criterias in the textbox" 
+                Text="Please select from the drop down the column you wish to search from, and enter the word contained in the item you wish to search for" 
                 VerticalAlignment="Center" 
                 HorizontalAlignment="Left"
                 FontSize="13"/>
@@ -42,7 +42,8 @@
                 Grid.Row="1" 
                 Margin="0 0 10 0"
                 FontSize="14"
-                ItemsSource="{Binding ColumnHeader}" />           
+                ItemsSource="{Binding ColumnHeader}" 
+                SelectedItem="{Binding SelectedOption}"/>           
             <TextBox 
                 Grid.Column="1" 
                 Grid.Row="1" 
