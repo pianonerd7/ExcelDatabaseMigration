@@ -42,7 +42,16 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
             SQLBuilder builder = new SQLBuilder(null, "nameDB", "", "");
             Assert.AreEqual("", builder.build());
             builder.createDatabase();
-            Assert.AreEqual("IF NOT EXISTS (select * from sys.databases where name = 'nameDB') CREATE DATABASE nameDB;\n", builder.build());
+            Assert.AreEqual("IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = 'nameDB') CREATE DATABASE nameDB;\n", builder.build());
+        }
+
+        [TestMethod]
+        public void CreateUse()
+        {
+            SQLBuilder builder = new SQLBuilder(null, "useME", "", "");
+            Assert.AreEqual("", builder.build());
+            builder.createUse();
+            Assert.AreEqual("USE useME;\n", builder.build());
         }
 
         [TestMethod]

@@ -65,13 +65,13 @@ namespace Excel_Database_Migration.SQLGeneration
             {
                 return this;
             }
-            builder.Append(String.Format("IF NOT EXISTS (select * from sys.databases where name = '{0}') CREATE DATABASE {0};\n", schemaName, schemaName));
+            builder.Append(String.Format("IF NOT EXISTS (SELECT * FROM sys.databases WHERE name = '{0}') CREATE DATABASE {0};\n", schemaName, schemaName));
             return this;
         }
         
         public SQLBuilder createUse()
         {
-            builder.Append(String.Format("use {0};\n", schemaName));
+            builder.Append(String.Format("USE {0};\n", schemaName));
             return this;
         }
 
