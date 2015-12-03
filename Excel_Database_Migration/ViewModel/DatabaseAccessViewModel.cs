@@ -228,7 +228,7 @@ namespace Excel_Database_Migration.ViewModel
             string filename = Path.GetFileNameWithoutExtension(savePath);
             string csvPath = Path.GetDirectoryName(savePath) + "\\" + filename + ".csv";
 
-            DataTableToCSVConverter.convertToCSV(table, csvPath);
+            DataTableToCSVConverter.WriteDataTableAsCSV(table, csvPath);
 
             CSVToXLSXConverter.toXLSX(csvPath, savePath);
 

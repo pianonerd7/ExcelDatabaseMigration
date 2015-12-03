@@ -9,7 +9,25 @@ namespace Excel_Database_Migration.ExcelUtils
 {
     public class DataTableToCSVConverter
     {
-        public static void convertToCSV(DataTable table, string path)
+        /// <summary>
+        /// 
+        /// Actually writes the CSVWrapper object into file
+        /// </summary>
+        /// <param name="table"></param>
+        /// <param name="path"></param>
+        public static void WriteDataTableAsCSV(DataTable table, string path)
+        {
+            CSVWrapper csv = ConvertToCSV(table);
+            csv.writeCSV(path);
+        }
+        
+        /// <summary>
+        /// 
+        /// Converts a Data Table into a CSVWrapper object
+        /// </summary>
+        /// <param name="table"></param>
+        /// <returns></returns>
+        public static CSVWrapper ConvertToCSV(DataTable table)
         {
             CSVWrapper csv = new CSVWrapper();
 
@@ -19,17 +37,16 @@ namespace Excel_Database_Migration.ExcelUtils
                 attributes.Add(dc.ColumnName);
             }
             csv.Attributes = attributes.ToArray<string>();
-            foreach(DataRow row in table.Rows)
+            foreach (DataRow row in table.Rows)
             {
-
                 List<string> dataRow = new List<string>();
-                foreach(DataColumn col in table.Columns)
+                foreach (DataColumn col in table.Columns)
                 {
                     dataRow.Add("" + row[col]);
                 }
                 csv.addRow(dataRow.ToArray<string>());
             }
-            csv.writeCSV(path);
+            return csv;
         }
 
     }
