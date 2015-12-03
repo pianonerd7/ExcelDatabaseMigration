@@ -53,6 +53,14 @@ namespace Excel_Database_Migration.SQLGeneration
             return string.Format("Server=localhost;Integrated security=True;database={0}", dbName);
         }
 
+        public static void generateFromSql(string sqlPath)
+        {
+            string[] lines = File.ReadAllLines(sqlPath);
+            string filename = Path.GetFileNameWithoutExtension(sqlPath);
+            createDatabaseFromSql(lines, filename);
+            populateDatabaseFromSql(lines, filename);
+        }
+
         private static void createDatabaseFromSql(string[] lines, string dbName)
         {
             string connectionString ="Server=localhost;Integrated security=True";
