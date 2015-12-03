@@ -34,6 +34,14 @@ namespace Excel_Database_Migration.DatabaseAccess
             return dbAccess.GetQuery(query);
         }
 
+        public DataTable SelectQuery(string select, string dbName, string column, string pattern)
+        {
+            string query =
+                String.Format("SELECT {0} FROM {1}Table WHERE {2} LIKE {3}", select, dbName, column, pattern);
+
+            return dbAccess.GetQuery(query);
+        }
+
         public int DeleteQuery(string dbName, string condition)
         {
             string query =
