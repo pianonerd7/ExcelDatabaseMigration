@@ -106,6 +106,33 @@ namespace Excel_Database_Migration_Test.DatabaseAccess
             Assert.AreEqual("120", table.Rows[1]["Salary"].ToString());
         }
         
+        [TestMethod]
+        public void TestDelete_rowID()
+        {
+            CreateTestDatabase();
+            query = new QueryWrapper(connectionString);
+
+            query.InsertQuery(testDBName, "Name, Gender, Salary", "'Bob', NULL, '80'");
+            query.InsertQuery(testDBName, "Name, Gender, Salary", "'Tom', NULL, '84'");
+            query.InsertQuery(testDBName, "Name, Gender, Salary", "'Teresa', NULL, '100'");
+            DataTable table = query.SelectQuery("*", testDBName);
+
+            Assert.AreEqual(3, table.Rows.Count);
+            query.DeleteQuery(testDBName, "rowID = 1");
+
+            table = query.SelectQuery("*", testDBName);
+
+            Assert.AreEqual(2, table.Rows.Count);
+            Assert.AreEqual("Tom", table.Rows[0]["Name"].ToString());
+            Assert.AreEqual("", table.Rows[0]["Gender"].ToString());
+            Assert.AreEqual("80", table.Rows[0]["Salary"].ToString());
+
+
+            Assert.AreEqual("Teresa", table.Rows[1]["Name"].ToString());
+            Assert.AreEqual("", table.Rows[1]["Gender"].ToString());
+            Assert.AreEqual("100", table.Rows[1]["Salary"].ToString());
+
+        }
 
         private void CreateTestDatabase()
         {
