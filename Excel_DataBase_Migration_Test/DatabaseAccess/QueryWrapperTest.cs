@@ -66,6 +66,47 @@ namespace Excel_Database_Migration_Test.DatabaseAccess
             Assert.AreEqual("80", table.Rows[0]["Salary"].ToString());
         }
 
+        [TestMethod]
+        public void TestUpdate_singleValue()
+        {
+            CreateTestDatabase();
+            query = new QueryWrapper(connectionString);
+
+            query.InsertQuery(testDBName, "Name, Gender, Salary", "'Bob', NULL, '80'");
+            DataTable table = query.SelectQuery("*", testDBName);
+
+            query.UpdateQuery(testDBName, "Salary", "'120'", "'1'");
+
+            table = query.SelectQuery("*", testDBName);
+
+            Assert.AreEqual(1, table.Rows.Count);
+            Assert.AreEqual("Bob", table.Rows[0]["Name"].ToString());
+            Assert.AreEqual("", table.Rows[0]["Gender"].ToString());
+            Assert.AreEqual("120", table.Rows[0]["Salary"].ToString());
+        }
+
+        [TestMethod]
+        public void TestUpdate_singleValue_moreThanOneRow()
+        {
+            CreateTestDatabase();
+            query = new QueryWrapper(connectionString);
+
+            query.InsertQuery(testDBName, "Name, Gender, Salary", "'Bob', NULL, '80'");
+            query.InsertQuery(testDBName, "Name, Gender, Salary", "'Tom', NULL, '84'");
+            query.InsertQuery(testDBName, "Name, Gender, Salary", "'Teresa', NULL, '100'");
+            DataTable table = query.SelectQuery("*", testDBName);
+
+            query.UpdateQuery(testDBName, "Salary", "'120'", "'2'");
+
+            table = query.SelectQuery("*", testDBName);
+
+            Assert.AreEqual(1, table.Rows.Count);
+            Assert.AreEqual("Tom", table.Rows[2]["Name"].ToString());
+            Assert.AreEqual("", table.Rows[2]["Gender"].ToString());
+            Assert.AreEqual("120", table.Rows[2]["Salary"].ToString());
+        }
+        
+
         private void CreateTestDatabase()
         {
             SQLGenerator.generateFromSql(FormatPath.formatPath("testDB.sql"));
