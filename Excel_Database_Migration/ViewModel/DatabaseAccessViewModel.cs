@@ -108,6 +108,11 @@ namespace Excel_Database_Migration.ViewModel
             {
                 return _queryDataTable;
             }
+            set
+            {
+                _queryDataTable = value;
+                OnPropertyChanged("QueryData");
+            }
         }
 
         public ObservableCollection<String> ColumnHeader
