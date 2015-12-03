@@ -27,9 +27,43 @@ namespace Excel_Database_Migration_Test.DatabaseAccess
         }
 
         [TestMethod]
-        public void TestInsert()
+        public void TestInsert_singleValue()
         {
+            CreateTestDatabase();
+            query = new QueryWrapper(connectionString);
 
+            query.InsertQuery(testDBName, "Name", "'Bob'");
+            DataTable table = query.SelectQuery("*", testDBName);
+            Assert.AreEqual(1, table.Rows.Count);
+            Assert.AreEqual("Bob", table.Rows[0]["Name"].ToString());
+        }
+
+        [TestMethod]
+        public void TestInsert_allValue()
+        {
+            CreateTestDatabase();
+            query = new QueryWrapper(connectionString);
+
+            query.InsertQuery(testDBName, "Name, Gender, Salary", "'Bob', 'M', '80'");
+            DataTable table = query.SelectQuery("*", testDBName);
+            Assert.AreEqual(1, table.Rows.Count);
+            Assert.AreEqual("Bob", table.Rows[0]["Name"].ToString());
+            Assert.AreEqual("M", table.Rows[0]["Gender"].ToString());
+            Assert.AreEqual("80", table.Rows[0]["Salary"].ToString());
+        }
+
+        [TestMethod]
+        public void TestInsert_allValue_withNULL()
+        {
+            CreateTestDatabase();
+            query = new QueryWrapper(connectionString);
+
+            query.InsertQuery(testDBName, "Name, Gender, Salary", "'Bob', NULL, '80'");
+            DataTable table = query.SelectQuery("*", testDBName);
+            Assert.AreEqual(1, table.Rows.Count);
+            Assert.AreEqual("Bob", table.Rows[0]["Name"].ToString());
+            Assert.AreEqual("", table.Rows[0]["Gender"].ToString());
+            Assert.AreEqual("80", table.Rows[0]["Salary"].ToString());
         }
 
         private void CreateTestDatabase()
