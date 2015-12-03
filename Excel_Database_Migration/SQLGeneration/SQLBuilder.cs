@@ -44,6 +44,11 @@ namespace Excel_Database_Migration.SQLGeneration
             return this;
         }
 
+        /// <summary>
+        /// 
+        /// @Deprecated
+        /// </summary>
+        /// <returns></returns>
         public SQLBuilder createSchema()
         {
             if (schemaName=="" || schemaName== null)

@@ -10,7 +10,7 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
     public class SQLBuilderTest
     {
         [TestMethod]
-        public void createSchemaTest_empty()
+        public void CreateSchemaTest_empty()
         {
             SQLBuilder builder = new SQLBuilder(null, "", "", "");
             Assert.AreEqual("", builder.build());
@@ -19,12 +19,30 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
         }
 
         [TestMethod]
-        public void createSchemaTest_name()
+        public void DropTableTest_name()
         {
-            SQLBuilder builder = new SQLBuilder(null, "name", "", "");
+            SQLBuilder builder = new SQLBuilder(null, "", "nameTable", "");
             Assert.AreEqual("", builder.build());
-            builder.createSchema();
-            Assert.AreEqual("CREATE SCHEMA IF NOT EXISTS name;\n", builder.build());
+            builder.dropTable();
+            Assert.AreEqual("If Exists(Select object_id From sys.tables Where name = 'nameTable') Drop Table nameTable;\n", builder.build());
+        }
+
+        [TestMethod]
+        public void createDatabaseTest_empty()
+        {
+            SQLBuilder builder = new SQLBuilder(null, "", "", "");
+            Assert.AreEqual("", builder.build());
+            builder.createDatabase();
+            Assert.AreEqual("", builder.build());
+        }
+
+        [TestMethod]
+        public void createDatabaseTest_name()
+        {
+            SQLBuilder builder = new SQLBuilder(null, "nameDB", "", "");
+            Assert.AreEqual("", builder.build());
+            builder.createDatabase();
+            Assert.AreEqual("IF NOT EXISTS (select * from sys.databases where name = 'nameDB') CREATE DATABASE nameDB;\n", builder.build());
         }
 
         [TestMethod]
