@@ -35,7 +35,7 @@ namespace Excel_Database_Migration.SQLGeneration
             string sqlPath = pathWOExtension + ".sql";
             Console.WriteLine("sqlPath is: " + sqlPath);
             string sqlContent = new SQLBuilder(csv, filename, filename+"Table", datatypePath).
-                createDatabase().dropTable().createUse().createTable().createInsert().build();
+                CreateDatabase().DropTable().CreateUse().CreateTable().CreateInsert().Build();
             //make the contents of the connection string file
             string dbPath = pathWOExtension + ProjectStrings.CONNECTION_STRING_FILE_EXTENSION;
             string dbContent = DatabaseInfo.DatabaseName;
