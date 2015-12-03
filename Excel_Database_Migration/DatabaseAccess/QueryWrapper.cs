@@ -17,6 +17,11 @@ namespace Excel_Database_Migration.DatabaseAccess
             dbAccess = new DatabaseAccess(SQLGenerator.createConnectionStringFromDbName(DatabaseInfo.DatabaseName)); //need to insert connection string to constructor
         }
 
+        public QueryWrapper(string connectionString)
+        {
+            dbAccess = new DatabaseAccess(connectionString);
+        }
+
         #region Query Methods
         public DataTable SelectQuery(string select, string dbName)
         {
