@@ -25,7 +25,7 @@ namespace Excel_Database_Migration.SQLGeneration
             CleanNames();
             builder = new StringBuilder();
             datatype = null;
-            if (datatypePath != null)
+            if (string.IsNullOrEmpty(datatypePath) && File.Exists(datatypePath))
             {
                 datatype = File.ReadAllText(datatypePath).Split(',');
             }
