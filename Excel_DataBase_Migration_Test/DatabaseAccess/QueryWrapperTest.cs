@@ -75,7 +75,7 @@ namespace Excel_Database_Migration_Test.DatabaseAccess
             query.InsertQuery(testDBName, "Name, Gender, Salary", "'Bob', NULL, '80'");
             DataTable table = query.SelectQuery("*", testDBName);
 
-            query.UpdateQuery(testDBName, "Salary", "'120'", "'1'");
+            query.UpdateQuery(testDBName, "Salary", "120", "1");
 
             table = query.SelectQuery("*", testDBName);
 
@@ -96,14 +96,14 @@ namespace Excel_Database_Migration_Test.DatabaseAccess
             query.InsertQuery(testDBName, "Name, Gender, Salary", "'Teresa', NULL, '100'");
             DataTable table = query.SelectQuery("*", testDBName);
 
-            query.UpdateQuery(testDBName, "Salary", "'120'", "'2'");
+            query.UpdateQuery(testDBName, "Salary", "120", "2");
 
             table = query.SelectQuery("*", testDBName);
 
-            Assert.AreEqual(1, table.Rows.Count);
-            Assert.AreEqual("Tom", table.Rows[2]["Name"].ToString());
-            Assert.AreEqual("", table.Rows[2]["Gender"].ToString());
-            Assert.AreEqual("120", table.Rows[2]["Salary"].ToString());
+            Assert.AreEqual(3, table.Rows.Count);
+            Assert.AreEqual("Tom", table.Rows[1]["Name"].ToString());
+            Assert.AreEqual("", table.Rows[1]["Gender"].ToString());
+            Assert.AreEqual("120", table.Rows[1]["Salary"].ToString());
         }
         
 
