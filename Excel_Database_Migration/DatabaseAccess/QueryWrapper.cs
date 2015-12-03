@@ -37,7 +37,7 @@ namespace Excel_Database_Migration.DatabaseAccess
         public DataTable SelectQuery(string select, string dbName, string column, string pattern)
         {
             string query =
-                String.Format("SELECT {0} FROM {1}Table WHERE {2} LIKE {3}", select, dbName, column, pattern);
+                String.Format("SELECT {0} FROM {1}Table WHERE {2} LIKE '{3}'", select, dbName, column, pattern);
 
             return dbAccess.GetQuery(query);
         }
