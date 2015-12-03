@@ -54,7 +54,7 @@ namespace Excel_Database_Migration.ViewModel
         private void InitializeDataTable()
         {
             _queryWrapper = new QueryWrapper();
-            _queryDataTable = _queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName,"");
+            _queryDataTable = _queryWrapper.SelectQuery("*",DatabaseInfo.DatabaseName);
             _attributeString = "";
             int i = 0;
             foreach (DataColumn col in _queryDataTable.Columns)

@@ -18,14 +18,20 @@ namespace Excel_Database_Migration.DatabaseAccess
         }
 
         #region Query Methods
+        public DataTable SelectQuery(string select, string dbName)
+        {
+            string query =
+                String.Format("SELECT {0} FROM {1}Table", select, dbName);
+
+            return dbAccess.GetQuery(query);
+        }
 
         public DataTable SelectQuery(string select, string dbName, string condition)
         {
             string query = 
-                String.Format("SELECT {0} FROM {1}Table {2}", select, dbName, condition);
+                String.Format("SELECT {0} FROM {1}Table WHERE {2}", select, dbName, condition);
             
             return dbAccess.GetQuery(query);
-            
         }
 
         public int DeleteQuery(string dbName, string condition)
