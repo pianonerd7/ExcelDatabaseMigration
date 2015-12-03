@@ -28,7 +28,7 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
         }
 
         [TestMethod]
-        public void createDatabaseTest_empty()
+        public void CreateDatabaseTest_empty()
         {
             SQLBuilder builder = new SQLBuilder(null, "", "", "");
             Assert.AreEqual("", builder.build());
@@ -37,7 +37,7 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
         }
 
         [TestMethod]
-        public void createDatabaseTest_name()
+        public void CreateDatabaseTest_name()
         {
             SQLBuilder builder = new SQLBuilder(null, "nameDB", "", "");
             Assert.AreEqual("", builder.build());
@@ -55,7 +55,7 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
         }
 
         [TestMethod]
-        public void createTableTest_empty()
+        public void CreateTableTest_empty()
         {
             SQLBuilder builder = new SQLBuilder(null, "", "", "");
             Assert.AreEqual("", builder.build());
@@ -64,7 +64,7 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
         }
 
         [TestMethod]
-        public void createTableTest_emptyCSV()
+        public void CreateTableTest_emptyCSV()
         {
             SQLBuilder builder = new SQLBuilder(new CSVWrapper(), "", "", "");
             Assert.AreEqual("", builder.build());
@@ -73,29 +73,29 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
         }
 
         [TestMethod]
-        public void createTableTest_name_noAttributes()
+        public void CreateTableTest_name_noAttributes()
         {
             CSVWrapper csv = new CSVWrapper();
             csv.openCSV(FormatPath.formatPath("empty.csv"));
             SQLBuilder builder = new SQLBuilder(csv, "", "Account", "");
             Assert.AreEqual("", builder.build());
             builder.createTable();
-            Assert.AreEqual("CREATE TABLE Account ();\n", builder.build());
+            Assert.AreEqual("CREATE TABLE Account (RowID int IDENTITY (1,1) PRIMARY KEY);\n", builder.build());
         }
 
         [TestMethod]
-        public void createTableTest_name_smallCSV()
+        public void CreateTableTest_name_smallCSV()
         {
             CSVWrapper csv = new CSVWrapper();
             csv.openCSV(FormatPath.formatPath("test1.csv"));
             SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
             Assert.AreEqual("", builder.build());
             builder.createTable();
-            Assert.AreEqual("CREATE TABLE Employee (Name varchar(255), Gender varchar(255), Salary varchar(255));\n", builder.build());
+            Assert.AreEqual("CREATE TABLE Employee (RowID int IDENTITY (1,1) PRIMARY KEY, Name text, Gender text, Salary text);\n", builder.build());
         }
 
         [TestMethod]
-        public void createInsertTest_emptyCSV()
+        public void CreateInsertTest_emptyCSV()
         {
             CSVWrapper csv = new CSVWrapper();
             csv.openCSV(FormatPath.formatPath("empty.csv"));
@@ -106,14 +106,14 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
         }
 
         [TestMethod]
-        public void createInsertTest_smallCSV()
+        public void CreateInsertTest_smallCSV()
         {
             CSVWrapper csv = new CSVWrapper();
             csv.openCSV(FormatPath.formatPath("test1.csv"));
             SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
             Assert.AreEqual("", builder.build());
             builder.createInsert();
-            Assert.AreEqual("INSERT INTO Employee((Name, Gender, Salary)VALUES (Tom, M, 20);\nINSERT INTO Employee((Name, Gender, Salary)VALUES (Adam, M, 30);\nINSERT INTO Employee((Name, Gender, Salary)VALUES (Sara, F, 40);\nINSERT INTO Employee((Name, Gender, Salary)VALUES (Serena, F, 50);\n", builder.build());
+            Assert.AreEqual("INSERT INTO Employee((Name, Gender, Salary)VALUES ('Tom', 'M', '20');\nINSERT INTO Employee((Name, Gender, Salary)VALUES ('Adam', 'M', '30');\nINSERT INTO Employee((Name, Gender, Salary)VALUES ('Sara', 'F', '40');\nINSERT INTO Employee((Name, Gender, Salary)VALUES ('Serena', 'F', '50');\n", builder.build());
         }
     }
 }
