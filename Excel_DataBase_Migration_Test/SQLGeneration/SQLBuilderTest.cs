@@ -136,7 +136,14 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
         [TestMethod]
         public void CleanStringTestSpecialCharacter()
         {
-            
+            CSVWrapper csv = new CSVWrapper();
+            csv.openCSV(FormatPath.formatPath("space.csv"));
+            SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
+            Assert.AreEqual("", builder.build());
+            builder.createInsert();
+            string[] insertLines = builder.build().Split('\n');
+            Assert.AreEqual("INSERT INTO Employee(amt_in, amt1, amt2, sum) VALUES ('10', '50', '50','100');", insertLines[0]);
+            Assert.AreEqual("INSERT INTO Employee(amt_in, amt1, amt2, sum) VALUES ('12', '20', '70', '90');", insertLines[1]);
         }
     }
 }
