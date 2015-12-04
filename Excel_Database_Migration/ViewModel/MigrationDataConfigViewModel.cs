@@ -132,9 +132,7 @@ namespace Excel_Database_Migration.ViewModel
 
         private bool CanExecuteContinueConfigCommand(object obj)
         {
-            //return _migrationFilePath == null;
-            //TODO
-            return true;
+            return MigrationFilePath != null;
         }
 
         private void ExecuteContinueConfigCommand(object obj)

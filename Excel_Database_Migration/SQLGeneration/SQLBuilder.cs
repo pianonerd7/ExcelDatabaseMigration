@@ -25,7 +25,7 @@ namespace Excel_Database_Migration.SQLGeneration
             CleanNames();
             builder = new StringBuilder();
             datatype = null;
-            if (string.IsNullOrEmpty(datatypePath) && File.Exists(datatypePath))
+            if (!string.IsNullOrEmpty(datatypePath) && File.Exists(datatypePath))
             {
                 datatype = File.ReadAllText(datatypePath).Split(',');
             }
@@ -37,7 +37,7 @@ namespace Excel_Database_Migration.SQLGeneration
             tableName = CleanString(tableName);
         }
         
-        public SQLBuilder dropTable()
+        public SQLBuilder DropTable()
         {
             builder.Append(String.Format(
                 "If Exists(Select object_id From sys.tables Where name = '{0}') Drop Table {1};\n", tableName, tableName));
@@ -59,7 +59,7 @@ namespace Excel_Database_Migration.SQLGeneration
             return this;
         }
 
-        public SQLBuilder createDatabase()
+        public SQLBuilder CreateDatabase()
         {
             if (schemaName == "" || schemaName == null)
             {
@@ -69,13 +69,13 @@ namespace Excel_Database_Migration.SQLGeneration
             return this;
         }
         
-        public SQLBuilder createUse()
+        public SQLBuilder CreateUse()
         {
             builder.Append(String.Format("USE {0};\n", schemaName));
             return this;
         }
 
-        public SQLBuilder createTable()
+        public SQLBuilder CreateTable()
         {
             if (tableName=="" || tableName== null)
             {
@@ -108,7 +108,7 @@ namespace Excel_Database_Migration.SQLGeneration
         /**
         *Writes the SQL Statement for all the rows of data
         */
-        public SQLBuilder createInsert()
+        public SQLBuilder CreateInsert()
         {
             if (csv.Attributes== null)
             {
@@ -168,7 +168,7 @@ namespace Excel_Database_Migration.SQLGeneration
             return attributeBuilder.ToString();
         }
 
-        public string build()
+        public string Build()
         {
             return builder.ToString();
         }

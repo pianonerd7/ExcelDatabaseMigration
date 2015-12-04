@@ -35,7 +35,7 @@ namespace Excel_Database_Migration.SQLGeneration
             string sqlPath = pathWOExtension + ".sql";
             Console.WriteLine("sqlPath is: " + sqlPath);
             string sqlContent = new SQLBuilder(csv, filename, filename+"Table", datatypePath).
-                createDatabase().dropTable().createUse().createTable().createInsert().build();
+                CreateDatabase().DropTable().CreateUse().CreateTable().CreateInsert().Build();
             //make the contents of the connection string file
             string dbPath = pathWOExtension + ProjectStrings.CONNECTION_STRING_FILE_EXTENSION;
             string dbContent = DatabaseInfo.DatabaseName;
@@ -51,6 +51,14 @@ namespace Excel_Database_Migration.SQLGeneration
         public static string createConnectionStringFromDbName(string dbName)
         {
             return string.Format("Server=localhost;Integrated security=True;database={0}", dbName);
+        }
+
+        public static void generateFromSql(string sqlPath)
+        {
+            string[] lines = File.ReadAllLines(sqlPath);
+            string filename = Path.GetFileNameWithoutExtension(sqlPath);
+            createDatabaseFromSql(lines, filename);
+            populateDatabaseFromSql(lines, filename);
         }
 
         private static void createDatabaseFromSql(string[] lines, string dbName)
@@ -70,7 +78,6 @@ namespace Excel_Database_Migration.SQLGeneration
                 MessageBox.Show(e.ToString(), ProjectStrings.APPLICATION_NAME, MessageBoxButton.OK, MessageBoxImage.Information);
             }
             connection.Close();
-            
         }
         
         /// <summary>
@@ -96,7 +103,6 @@ namespace Excel_Database_Migration.SQLGeneration
                 try
                 {
                     command = new SqlCommand(line, connection);
-                    //command.CommandText = line;
                     command.ExecuteNonQuery();
                 }
                 catch (System.Exception e)

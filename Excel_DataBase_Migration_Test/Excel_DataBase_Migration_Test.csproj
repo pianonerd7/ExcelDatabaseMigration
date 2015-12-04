@@ -54,6 +54,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="DatabaseAccess\QueryWrapperTest.cs" />
     <Compile Include="ExcelUtils\CSVWrapperTest.cs" />
     <Compile Include="ExcelUtils\DataTableToCSVConverterTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
