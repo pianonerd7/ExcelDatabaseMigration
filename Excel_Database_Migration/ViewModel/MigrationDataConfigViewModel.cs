@@ -21,6 +21,7 @@ namespace Excel_Database_Migration.ViewModel
         private Page _mainWindow;
         private string _migrationFilePath;
         private string _attributeFilePath;
+        private bool _canPressContinue;
         private readonly ICommand _selectFilePathCommand;
         private readonly ICommand _selectAttributeFilePathCommand;
         private readonly ICommand _continueConfigCommand;
@@ -35,6 +36,7 @@ namespace Excel_Database_Migration.ViewModel
             _selectFilePathCommand = new DelegateCommand(ExecuteSelectFilePathCommand, CanExecuteCommand);
             _selectAttributeFilePathCommand = new DelegateCommand(ExecuteSelectAttributeFilePathCommand, CanExecuteCommand);
             _continueConfigCommand = new DelegateCommand(ExecuteContinueConfigCommand, CanExecuteContinueConfigCommand);
+            _canPressContinue = false;
         }
 
         #endregion 
@@ -64,6 +66,19 @@ namespace Excel_Database_Migration.ViewModel
             {
                 _attributeFilePath = value;
                 OnPropertyChanged("AttributeFilePath");
+            }
+        }
+
+        public bool CanPressContinue
+        {
+            get
+            {
+                return _canPressContinue;
+            }
+            set
+            {
+                _canPressContinue = value;
+                OnPropertyChanged("CanPressContinue");
             }
         }
 
@@ -113,6 +128,9 @@ namespace Excel_Database_Migration.ViewModel
             if (result == true)
             {
                 MigrationFilePath = dialog.FileName;
+                CanPressContinue = true;
+                ((DelegateCommand)_continueConfigCommand).RaiseCanExecuteChanged();
+                Console.WriteLine("FilePath is: " + MigrationFilePath);
             }
         }
 
@@ -132,7 +150,7 @@ namespace Excel_Database_Migration.ViewModel
 
         private bool CanExecuteContinueConfigCommand(object obj)
         {
-            return MigrationFilePath != null;
+            return CanPressContinue;
         }
 
         private void ExecuteContinueConfigCommand(object obj)
