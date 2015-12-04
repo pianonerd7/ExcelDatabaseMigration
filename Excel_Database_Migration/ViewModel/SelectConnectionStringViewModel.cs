@@ -94,6 +94,7 @@ namespace Excel_Database_Migration.ViewModel
                 ConnectionStringFilePath = dialog.FileName;
                 string[] fileContent = File.ReadAllLines(dialog.FileName);
                 DatabaseInfo.DatabaseName = fileContent[0];
+                ((DelegateCommand)_continueCommand).RaiseCanExecuteChanged();
             }
 
         }
