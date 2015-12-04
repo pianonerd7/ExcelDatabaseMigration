@@ -23,6 +23,7 @@ namespace Excel_Database_Migration.ViewModel
 
         private Page _mainWindow;
         private DataTable _queryDataTable;
+        private DataTable completeTable;
         private ObservableCollection<String> _columnHeader;
         private Object _selectedOption;
         private readonly ICommand _searchCommand;
@@ -58,24 +59,23 @@ namespace Excel_Database_Migration.ViewModel
         {
             _queryWrapper = new QueryWrapper();
             FormatAttributeString();
-            _queryDataTable = _queryWrapper.SelectQuery(_attributeString, DatabaseInfo.DatabaseName);
             // to get rid of the last comma and space
             Console.WriteLine("Attribute string is: " + _attributeString);
         }
 
         private void FormatAttributeString()
         {
-            DataTable wholeTable = _queryWrapper.SelectQuery("*", DatabaseInfo.DatabaseName);
+            _queryDataTable = _queryWrapper.SelectQuery("*", DatabaseInfo.DatabaseName);
             _attributeString = "";
             int i = 0;
-            foreach (DataColumn col in wholeTable.Columns)
+            foreach (DataColumn col in _queryDataTable.Columns)
             {
                 if (col.ColumnName == "RowID")
                 {
                     continue;
                 }
                 _attributeString += col.ColumnName;
-                if (i < wholeTable.Columns.Count - 2) // -2 because there is RowID as well
+                if (i < _queryDataTable.Columns.Count - 2) // -2 because there is RowID as well
                 {
                     _attributeString += ", ";
                 }
