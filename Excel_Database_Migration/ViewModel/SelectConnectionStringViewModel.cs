@@ -30,8 +30,8 @@ namespace Excel_Database_Migration.ViewModel
         public SelectConnectionStringViewModel(Page mainWindow)
         {
             _mainWindow = mainWindow;
-            _selectConStrCommand = new DelegateCommand(ExecuteSelectConStrCommand, CanExecuteCommand);
-            _continueCommand = new DelegateCommand(ExecuteContinueCommand, CanExecuteCommand);
+            _selectConStrCommand = new DelegateCommand(ExecuteSelectConStrCommand, CanExecuteSelectionCommand);
+            _continueCommand = new DelegateCommand(ExecuteContinueCommand, CanExecuteContinueCommand);
         }
 
         #endregion
@@ -71,9 +71,14 @@ namespace Excel_Database_Migration.ViewModel
 
         #region Private Methods
 
-        private bool CanExecuteCommand(object obj)
+        private bool CanExecuteSelectionCommand(object obj)
         {
             return true;
+        }
+
+        private bool CanExecuteContinueCommand(object obj)
+        {
+            return ConnectionStringFilePath != null;
         }
 
         private void ExecuteSelectConStrCommand(object obj)
