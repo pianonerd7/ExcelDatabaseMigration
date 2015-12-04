@@ -126,9 +126,9 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
             CSVWrapper csv = new CSVWrapper();
             csv.openCSV(FormatPath.formatPath("space.csv"));
             SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
-            Assert.AreEqual("", builder.build());
-            builder.createInsert();
-            string[] insertLines = builder.build().Split('\n');
+            Assert.AreEqual("", builder.Build());
+            builder.CreateInsert();
+            string[] insertLines = builder.Build().Split('\n');
             Assert.AreEqual("INSERT INTO Employee(Name, Gender, Salary) VALUES ('Tom_The_Cat', 'M', '20');", insertLines[0]);
             Assert.AreEqual("INSERT INTO Employee(Name, Gender, Salary) VALUES ('Jerry_The_Mouse', 'M', '30');", insertLines[1]);
         }
@@ -139,9 +139,9 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
             CSVWrapper csv = new CSVWrapper();
             csv.openCSV(FormatPath.formatPath("space.csv"));
             SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
-            Assert.AreEqual("", builder.build());
-            builder.createInsert();
-            string[] insertLines = builder.build().Split('\n');
+            Assert.AreEqual("", builder.Build());
+            builder.CreateInsert();
+            string[] insertLines = builder.Build().Split('\n');
             Assert.AreEqual("INSERT INTO Employee(amt_in, amt1, amt2, sum) VALUES ('10', '50', '50','100');", insertLines[0]);
             Assert.AreEqual("INSERT INTO Employee(amt_in, amt1, amt2, sum) VALUES ('12', '20', '70', '90');", insertLines[1]);
         }
