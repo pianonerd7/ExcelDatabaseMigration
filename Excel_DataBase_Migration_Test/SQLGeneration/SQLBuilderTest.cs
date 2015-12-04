@@ -125,19 +125,17 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
         {
             CSVWrapper csv = new CSVWrapper();
             csv.openCSV(FormatPath.formatPath("space.csv"));
-            SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
+            SQLBuilder builder = new SQLBuilder(csv, "space", "spaceTable", null);
             Assert.AreEqual("", builder.Build());
-            builder.CreateInsert();
-            string[] insertLines = builder.Build().Split('\n');
-            Assert.AreEqual("INSERT INTO Employee(Name, Gender, Salary) VALUES ('Tom_The_Cat', 'M', '20');", insertLines[0]);
-            Assert.AreEqual("INSERT INTO Employee(Name, Gender, Salary) VALUES ('Jerry_The_Mouse', 'M', '30');", insertLines[1]);
+            builder.CreateTable();
+            Assert.AreEqual("CREATE TABLE spaceTable (RowID int IDENTITY (1,1) PRIMARY KEY, Name text, Gender text, Salary text, Marriage_Status text);\n", builder.Build());
         }
 
         [TestMethod]
         public void CleanStringTestSpecialCharacter()
         {
             CSVWrapper csv = new CSVWrapper();
-            csv.openCSV(FormatPath.formatPath("space.csv"));
+            csv.openCSV(FormatPath.formatPath("specialSymbol.csv"));
             SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
             Assert.AreEqual("", builder.Build());
             builder.CreateInsert();
