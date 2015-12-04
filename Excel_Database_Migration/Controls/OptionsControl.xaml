@@ -6,19 +6,6 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     
-    <StackPanel>
-        <Menu Width="Auto" Height="20">
-            <MenuItem Header="_File">
-                <MenuItem x:Name="AppExit" Header="E_xit" HorizontalAlignment="Left" Width="140"/>
-            </MenuItem>
-            <MenuItem Header="_Tools">
-                <MenuItem x:Name="Options" Header="_Options" HorizontalAlignment="Left" Width="140"/>
-            </MenuItem>
-            <MenuItem Header="_Help">
-                <MenuItem x:Name="About" Header="&amp;About" HorizontalAlignment="Left" Width="140"/>
-            </MenuItem>
-        </Menu>
-
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -52,5 +39,4 @@
             Content="Access Database" 
             Command="{Binding AccessDatabaseCommand}"/>
     </Grid>
-    </StackPanel>
 </UserControl>
