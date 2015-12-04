@@ -119,5 +119,24 @@ namespace Excel_DataBase_Migration_Test.SQLGeneration
             Assert.AreEqual("INSERT INTO Employee(Name, Gender, Salary) VALUES ('Sara', 'F', '40');", insertLines[2]);
             Assert.AreEqual("INSERT INTO Employee(Name, Gender, Salary) VALUES ('Serena', 'F', '50');", insertLines[3]);
         }
+
+        [TestMethod]
+        public void CleanStringTestSpace()
+        {
+            CSVWrapper csv = new CSVWrapper();
+            csv.openCSV(FormatPath.formatPath("space.csv"));
+            SQLBuilder builder = new SQLBuilder(csv, "", "Employee", "");
+            Assert.AreEqual("", builder.build());
+            builder.createInsert();
+            string[] insertLines = builder.build().Split('\n');
+            Assert.AreEqual("INSERT INTO Employee(Name, Gender, Salary) VALUES ('Tom_The_Cat', 'M', '20');", insertLines[0]);
+            Assert.AreEqual("INSERT INTO Employee(Name, Gender, Salary) VALUES ('Jerry_The_Mouse', 'M', '30');", insertLines[1]);
+        }
+
+        [TestMethod]
+        public void CleanStringTestSpecialCharacter()
+        {
+            
+        }
     }
 }
